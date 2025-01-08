@@ -1,15 +1,15 @@
-module javaprofiler.fxui {
+module org.matwoess.jsourceprofiler.fxui {
   requires javafx.controls;
   requires javafx.fxml;
   requires atlantafx.base;
   requires java.desktop;
-  requires javaprofiler.common;
-  requires javaprofiler.tool;
+  requires org.matwoess.jsourceprofiler.common;
+  requires org.matwoess.jsourceprofiler.tool;
 
 
-  opens javaprofiler.fxui to javafx.fxml;
-  exports javaprofiler.fxui;
-  exports javaprofiler.fxui.tree;
-  exports javaprofiler.fxui.model;
-  opens javaprofiler.fxui.tree to javafx.fxml;
+  opens org.matwoess.jsourceprofiler.fxui to javafx.fxml;
+  exports org.matwoess.jsourceprofiler.fxui;
+  exports org.matwoess.jsourceprofiler.fxui.tree;
+  exports org.matwoess.jsourceprofiler.fxui.model;
+  opens org.matwoess.jsourceprofiler.fxui.tree to javafx.fxml;
 }

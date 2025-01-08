@@ -2,7 +2,7 @@ package javaprofiler.cli;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import javaprofiler.tool.cli.FileCollector;
+import org.matwoess.jsourceprofiler.tool.cli.FileCollector;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,8 +1,8 @@
 package javaprofiler.cli;
 
-import javaprofiler.common.*;
 import org.junit.jupiter.api.Test;
-import javaprofiler.tool.cli.Main;
+import org.matwoess.jsourceprofiler.common.*;
+import org.matwoess.jsourceprofiler.tool.cli.Main;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

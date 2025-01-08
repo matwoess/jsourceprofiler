@@ -1,3 +1,3 @@
-module javaprofiler.common {
-  exports javaprofiler.common;
+module org.matwoess.jsourceprofiler.common {
+  exports org.matwoess.jsourceprofiler.common;
 }

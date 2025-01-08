@@ -1,9 +1,9 @@
 package javaprofiler.cli;
 
-import javaprofiler.common.OS;
-import javaprofiler.common.RunMode;
+import org.matwoess.jsourceprofiler.common.OS;
+import org.matwoess.jsourceprofiler.common.RunMode;
 import org.junit.jupiter.api.Test;
-import javaprofiler.tool.cli.Arguments;
+import org.matwoess.jsourceprofiler.tool.cli.Arguments;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static javaprofiler.tool.cli.Arguments.getUsage;
+import static org.matwoess.jsourceprofiler.tool.cli.Arguments.getUsage;
 
 public class ArgumentsTest {
   final Path samplesFolder = Path.of("..", "sample");

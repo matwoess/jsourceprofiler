@@ -1,4 +1,4 @@
-package javaprofiler.cli;
+package org.matwoess.jsourceprofiler.cli;
 
 import org.matwoess.jsourceprofiler.common.OS;
 import org.matwoess.jsourceprofiler.common.RunMode;

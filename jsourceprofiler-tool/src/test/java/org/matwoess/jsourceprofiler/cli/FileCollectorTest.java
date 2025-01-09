@@ -1,4 +1,4 @@
-package javaprofiler.cli;
+package org.matwoess.jsourceprofiler.cli;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

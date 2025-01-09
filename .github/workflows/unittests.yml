@@ -48,19 +48,19 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: report-tool-${{ matrix.osname }}
-          path: java-profiler-tool/build/reports/tests/
+          path: jsourceprofiler-tool/build/reports/tests/
 
       - name: "Upload Gradle report - common"
         uses: actions/upload-artifact@v4
         with:
           name: report-common-${{ matrix.osname }}
-          path: java-profiler-common/build/reports/tests/
+          path: jsourceprofiler-common/build/reports/tests/
 
       - name: "Upload JUnit results - tool"
         uses: dorny/test-reporter@v1
         with:
           name: "JUnit results - tool (${{ matrix.osname }})"
-          path: java-profiler-tool/build/test-results/test/TEST-*.xml
+          path: jsourceprofiler-tool/build/test-results/test/TEST-*.xml
           reporter: java-junit
           fail-on-error: false
 
@@ -68,6 +68,6 @@ jobs:
         uses: dorny/test-reporter@v1
         with:
           name: "JUnit results - common (${{ matrix.osname }})"
-          path: java-profiler-common/build/test-results/test/TEST-*.xml
+          path: jsourceprofiler-common/build/test-results/test/TEST-*.xml
           reporter: java-junit
           fail-on-error: false

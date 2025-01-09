@@ -6,4 +6,6 @@ mkdir -p ./lib
 if [[ ! -f ./lib/Coco.jar ]]; then
     curl --insecure --output lib/Coco.jar $coco_jar_url
 fi
-java -jar lib/Coco.jar -package tool.instrument java-profiler-tool/src/main/java/javaprofiler/tool/instrument/JavaFile.atg
+java -jar lib/Coco.jar \
+  -package org.matwoess.jsourceprofiler.tool.instrument \
+  jsourceprofiler-tool/src/main/java/org/matwoess/jsourceprofiler/tool/instrument/JavaFile.atg

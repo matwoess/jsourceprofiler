@@ -31,12 +31,12 @@ javafx {
 }
 
 application {
-    mainModule.set("fxui")
-    mainClass.set("fxui.Launcher")
+    mainModule.set("org.matwoess.jsourceprofiler.fxui")
+    mainClass.set("org.matwoess.jsourceprofiler.fxui.Launcher")
 }
 
 
-val mainClass = "fxui.Launcher"
+val mainClass = "org.matwoess.jsourceprofiler.fxui.Launcher"
 
 tasks {
     register("fatFxJar", Jar::class.java) {

@@ -1,5 +1,5 @@
-rootProject.name = "java-profiler"
+rootProject.name = "jsourceprofiler"
 
-include("java-profiler-common")
-include("java-profiler-tool")
-include("java-profiler-fxui")
+include("jsourceprofiler-common")
+include("jsourceprofiler-tool")
+include("jsourceprofiler-fxui")

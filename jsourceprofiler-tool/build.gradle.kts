@@ -55,7 +55,7 @@ publishing {
     repositories {
         maven {
             name = "githubPackages"
-            url = uri("https://maven.pkg.github.com/matwoess/java-profiler")
+            url = uri("https://maven.pkg.github.com/matwoess/jsourceprofiler")
             credentials(PasswordCredentials::class)
         }
     }
@@ -69,7 +69,7 @@ mavenPublishing {
         name.set("jsourceprofiler-tool")
         description.set("A command-line source code profiler for Java programs that generates HTML reports.")
         inceptionYear.set("2023")
-        url.set("https://github.com/matwoess/java-profiler/")
+        url.set("https://github.com/matwoess/jsourceprofiler/")
         licenses {
             license {
                 name.set("MIT License")
@@ -85,9 +85,9 @@ mavenPublishing {
             }
         }
         scm {
-            url.set("https://github.com/matwoess/java-profiler/")
-            connection.set("scm:git:git://github.com/matwoess/java-profiler.git")
-            developerConnection.set("scm:git:ssh://git@github.com/matwoess/java-profiler.git")
+            url.set("https://github.com/matwoess/jsourceprofiler/")
+            connection.set("scm:git:git://github.com/matwoess/jsourceprofiler.git")
+            developerConnection.set("scm:git:ssh://git@github.com/matwoess/jsourceprofiler.git")
         }
     }
 }

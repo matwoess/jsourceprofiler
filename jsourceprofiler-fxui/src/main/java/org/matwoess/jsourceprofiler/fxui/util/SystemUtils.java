@@ -78,13 +78,15 @@ public class SystemUtils {
    * @return the string representation of the java command
    */
   public static String getJavaRunCommand(String[] toolArguments) {
-    String toolJar = org.matwoess.jsourceprofiler.tool.cli.Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-    String commonJar = org.matwoess.jsourceprofiler.common.Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    var toolMainClass = org.matwoess.jsourceprofiler.tool.cli.Main.class;
+    var classInCommon = org.matwoess.jsourceprofiler.common.Util.class;
+    String toolJar = toolMainClass.getProtectionDomain().getCodeSource().getLocation().getPath();
+    String commonJar = classInCommon.getProtectionDomain().getCodeSource().getLocation().getPath();
     String classPath = toolJar;
     if (!commonJar.equals(toolJar)) {
       classPath += OS.getOS().pathSeparator() + commonJar;
     }
-    String[] toolMainCmd = {"java", "-cp", '"' + classPath + '"', "tool.cli.Main"};
+    String[] toolMainCmd = {"java", "-cp", '"' + classPath + '"', toolMainClass.getName()};
     String[] fullCmd = Util.prependToArray(toolArguments, toolMainCmd);
     return String.join(" ", fullCmd);
   }

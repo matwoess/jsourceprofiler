@@ -1,4 +1,4 @@
-# A Profiler for Java Programs
+# jsourceprofiler
 
 A source-code-instrumentation profiler for Java programs.
 Designed to be a single-JAR command line tool that generates HTML reports. 
@@ -577,6 +577,7 @@ For further analysis and details, see the thesis paper.
 - [JavaFX](https://openjfx.io/)
 - [AtlantaFX](https://github.com/mkpaz/atlantafx)
 - [Highlight.js](https://highlightjs.org/)
+- [Gradle Maven Publish Plugin](https://vanniktech.github.io/gradle-maven-publish-plugin/)
 
 ## Future work and ideas
 

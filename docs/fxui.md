@@ -9,7 +9,7 @@ Golden `(?)` labels can be hovered over for more information about each field.
 
 Before displaying the main window, a project directory must be chosen, using a selection dialog.
 
-![FxUI project selection dialog](/screenshots/fxui-project-selection-dialog.png)
+![FxUI project selection dialog](screenshots/fxui-project-selection-dialog.png)
 
 Clicking "Select" will show the system's native dialog to choose a folder.
 <br/>
@@ -21,7 +21,7 @@ On the next program execution, the previously opened path will be pre-filled.
 
 ### Main application window
 
-![FxUI main window](/screenshots/fxui-main-application-window.png)
+![FxUI main window](screenshots/fxui-main-application-window.png)
 
 
 Using the file tree on the left, the sources directory and main file can be selected. Depending on the run mode

@@ -9,7 +9,7 @@ It is stored in the `.profiler/report/` folder. The `index.html` file can be ope
 The main index lists all classes found during parsing.
 <br/>
 
-![Report classes overview](/screenshots/report-class-overview.png)
+![Report classes overview](screenshots/report-class-overview.png)
 
 By default, the list is sorted by the aggregated invocation count of all methods in each listed class.
 This enables us to quickly identify hotspots in the program for its last run.<br/>
@@ -31,7 +31,7 @@ A separate method index is created for each *top-level* class.
 <br/>
 It lists each non-abstract method, sorted by invocation count.
 
-![Report methods overview](/screenshots/report-method-overview.png)
+![Report methods overview](screenshots/report-method-overview.png)
 
 The heading displays the fully qualified name of the class.
 
@@ -48,10 +48,10 @@ Browser-back or the top button can be used to return to the class overview.
 For each Java file, an annotated source code file is generated inside `.profiler/report/source/`.
 It can be used to explore each class and its method in detail.
 
-A small [jQuery](https://jquery.com/) script [file](jsourceprofiler-tool/src/main/resources/highlighter.js) initializes
+A small [jQuery](https://jquery.com/) script [file](https://github.com/matwoess/jsourceprofiler/tree/main/jsourceprofiler-tool/src/main/resources/js/highlighter.js) initializes
 colors for relevant sections and dynamically updates them on mouse hover.
 
-![Report source file](/screenshots/report-source-view.png)
+![Report source file](screenshots/report-source-view.png)
 
 Code blocks that have been entered at least once during program execution
 are highlighted in <span style="color: green">green</span>.

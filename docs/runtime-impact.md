@@ -10,7 +10,7 @@ in three different configurations:
 The following figure shows the average relative run-time overhead of seven benchmarks
 programs compared to their un-instrumented version:
 
-![Relative runtime overhead in the DaCapo benchmarks](/screenshots/runtime-impact.png)
+![Relative runtime overhead in the DaCapo benchmarks](screenshots/runtime-impact.png)
 
 Most benchmarks show only a relatively small slowdown to less than 200% run time.
 The h2 program does not show any significant impact as most of its work in performed

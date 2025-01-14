@@ -15,7 +15,7 @@ updating and growing [Java Language Specification](https://docs.oracle.com/javas
 
 The five main stages of the profiler are:
 
-![The five main steps of the profiler](/screenshots/profiler-steps.png)
+![The five main steps of the profiler](screenshots/profiler-steps.png)
 
 In the default mode, this tool will parse and instrument source files automatically, compile them,
 run the program (with arguments), and generate an HTML report.
@@ -27,4 +27,4 @@ It further allows detailed exploration of source files and shows coverage (with 
 The profiler was designed to be a command line tool that can easily be used in scripts, CI/CD pipelines, and automation.
 
 For Java/programming beginners or users who are less familiar with the command line,
-a JavaFX tool-runner GUI was created (see [FxUI](#fxui) section).
+a JavaFX tool-runner GUI was created (see [FxUI](fxui.md) section).

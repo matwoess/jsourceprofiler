@@ -1,0 +1,38 @@
+site_name: jsourceprofiler Docs
+site_description: |
+  jsourceprofiler is a command-line profiler for Java programs using source code instrumentation.
+  The single JAR-file utility generates HTML reports enabling hotspot analysis and providing coverage with line counts. 
+  It features an optional JavaFX tool-runner GUI.
+
+nav:
+  - Introduction: index.md
+  - Getting Started: getting-started.md
+  - Usage: usage.md
+  - JavaFX UI: fxui.md
+  - Report: report.md
+  - Implementation Details: implementation-details.md
+  - Runtime Impact: runtime-impact.md
+  - Limitations: limitations.md
+  - Dependencies: dependencies.md
+  - FutureWork: future-work.md
+
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference

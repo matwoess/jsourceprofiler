@@ -17,13 +17,3 @@ The tool can parse Java **21** language syntax and should be executed with a JDK
 - [Dependencies](#dependencies)
 - [Future work and ideas](#future-work-and-ideas)
 
-
-
-## Future work and ideas
-
-- VSCode plugin (TypeScript)
-- IntelliJ IDEA plugin (Java)
-- Gradle task plugin (Java)
-- Be compatible with build tools like Ant / Gradle / Maven
-- JavaFX GUI improvements: theme / usability
-- ...

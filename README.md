@@ -19,18 +19,6 @@ The tool can parse Java **21** language syntax and should be executed with a JDK
 
 
 
-
-## Dependencies
-
-- [OpenJDK 21](https://openjdk.org/projects/jdk/21/)
-- [Coco/R](https://ssw.jku.at/Research/Projects/Coco/#Java)
-- [Gradle](https://gradle.org/)
-- [jQuery](https://jquery.com/)
-- [JavaFX](https://openjfx.io/)
-- [AtlantaFX](https://github.com/mkpaz/atlantafx)
-- [Highlight.js](https://highlightjs.org/)
-- [Gradle Maven Publish Plugin](https://vanniktech.github.io/gradle-maven-publish-plugin/)
-
 ## Future work and ideas
 
 - VSCode plugin (TypeScript)

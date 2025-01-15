@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - create-docs-page
     paths:
       - 'docs/**'
       - 'mkdocs.yml'

@@ -4,6 +4,8 @@ site_description: |
   The single JAR-file utility generates HTML reports enabling hotspot analysis and providing coverage with line counts. 
   It features an optional JavaFX tool-runner GUI.
 
+repo_url: https://github.com/matwoess/jsourceprofiler
+
 nav:
   - Introduction: index.md
   - Getting Started: getting-started.md

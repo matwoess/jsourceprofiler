@@ -14,7 +14,7 @@ nav:
   - Runtime Impact: runtime-impact.md
   - Limitations: limitations.md
   - Dependencies: dependencies.md
-  - FutureWork: future-work.md
+  - Future Work: future-work.md
 
 theme:
   name: material

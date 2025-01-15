@@ -7,13 +7,12 @@ Optionally, a JavaFX GUI is available to configure the parameters and run the to
 The tool can parse Java **21** language syntax and should be executed with a JDK of version 17 or higher.
 
 ## Quick links:
-- [Introduction](#introduction)
-- [Download](#download)
-- [Building from source](#building-from-source)
-- [Usage](#usage)
-- [FxUI](#fxui)
-- [Report](#report)
-- [Implementation details](#implementation-details)
-- [Dependencies](#dependencies)
-- [Future work and ideas](#future-work-and-ideas)
+- [Introduction](docs/index.md)
+- [Getting Started](docs/getting-started.md)
+- [Usage](docs/usage.md)
+- [FxUI](docs/fxui.md)
+- [Report](docs/report.md)
+- [Implementation details](docs/implementation-details.md)
+- [Dependencies](docs/dependencies.md)
+- [Future work and ideas](docs/future-work.md)
 

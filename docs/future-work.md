@@ -1,4 +1,4 @@
-## Future work and ideas
+# Future work and Ideas
 
 - VSCode plugin (TypeScript)
 - IntelliJ IDEA plugin (Java)

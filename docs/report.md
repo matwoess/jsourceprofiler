@@ -1,10 +1,10 @@
-## Report
+# Report
 
 In the default run mode (or by using the `-r` mode) an HTML report will be generated inside the output directory.
 <br/>
 It is stored in the `.profiler/report/` folder. The `index.html` file can be opened in a browser to view it.
 
-### Classes (index.html)
+## Classes (index.html)
 
 The main index lists all classes found during parsing.
 <br/>
@@ -25,7 +25,7 @@ Clicking on the class name will open the "Methods" index for this class.
 <br/>
 By clicking on the source file link, we can jump directly to the source file detail report.
 
-### Methods (index_ClassName.html)
+## Methods (index_ClassName.html)
 
 A separate method index is created for each *top-level* class.
 <br/>
@@ -43,7 +43,7 @@ Clicking on a method name will jump into the source detail report, to the line n
 
 Browser-back or the top button can be used to return to the class overview.
 
-### Source file detail report (JavaFileName.html)
+## Source file detail report (JavaFileName.html)
 
 For each Java file, an annotated source code file is generated inside `.profiler/report/source/`.
 It can be used to explore each class and its method in detail.

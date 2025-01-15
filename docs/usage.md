@@ -1,4 +1,4 @@
-## Usage
+# Usage
 ```
 Usage: profiler [options] <main file> [program args]  
 Or   : profiler [options] <run mode>
@@ -13,7 +13,7 @@ It is therefore recommended to run the command line tool in the project's root d
 
 If the Main file references other source files the `-d`/`--sources-directory` parameter is **required**!
 
-### Sample usage and explanation
+## Sample usage and explanation
 (In the below section the `java -jar profiler.jar` command is substituted by `profiler`)
 
 In the simplest case, the tool can be used as following:
@@ -44,10 +44,10 @@ as soon as the program ends.
 
 Finally, the metadata and counts will be used to create the report inside `.profiler/report/`.
 
-### Command line options
+## Command line options
 There are a few optional arguments available. For a full list, run `profiler -h` or `profiler --help`.
 
-#### sources-directory
+### sources-directory
 If the project-to-profile consists of two or more (linked) Java files, the sources directory has to be specified.
 This is done with the `-d` or `--sources-directory` option:
 ```shell
@@ -58,16 +58,16 @@ Using this option, all `.java` files inside `src/main/java/` will be parsed, ins
 "instrumented" directory. The relative folder-structure is replicated to ensure successful compilation (`javac` will
 throw an error if the package name and file paths mismatch).
 
-#### synchronized
+### synchronized
 When adding `-s` or `--synchronized` as a option, all inserted counters will be incremented atomically.
 This might be useful for multi-threaded programs, where a few methods or blocks are constantly executed in parallel.
 It will ensure that hit counts are correct, but runtime performance will be impacted.
 
-#### verbose
+### verbose
 This option is mainly for debugging purposes. It can be activated with `-v` or `--verbose` and will output
 detailed information about the parsing process for each file.
 
-### Run modes
+## Run modes
 
 The tool is primarily designed for easy usage with small projects that have a Main file.
 In case the project cannot be compiled with `javac Main.java`, or uses build tools (like Maven, Gradle, or Ant),
@@ -75,14 +75,14 @@ we cannot use the default compilation logic.
 
 For this case, two additional run modes are available:
 
-#### instrument-only
+### instrument-only
 
 By specifying the `-i <file|dir>` or `--instrument-only <file|dir>` mode the target file (or directory
 with all its Java files) will be instrumented and written to the `.profiler/instrumented/` directory.
 Also, the `metadata.dat` file is generated.
 The instrumented code can then be compiled by custom commands and run manually.
 
-#### generate-report-only
+### generate-report-only
 
 If a project was already instrumented and run, the HTML report can be quickly (re-)generated
 with the `-r` or `--generate-report` run mode.

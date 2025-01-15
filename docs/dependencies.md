@@ -1,4 +1,4 @@
-## Dependencies
+# Dependencies
 
 - [OpenJDK 21](https://openjdk.org/projects/jdk/21/)
 - [Coco/R](https://ssw.jku.at/Research/Projects/Coco/#Java)

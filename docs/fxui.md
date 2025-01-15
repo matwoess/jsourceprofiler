@@ -1,11 +1,11 @@
-## FxUI
+# FxUI
 
 A graphical application (using th [JavaFX](https://openjfx.io/) toolkit) was created, to easily configure parameters and arguments
 for the command-line tool. The profiler is then executed in a terminal.
 
 Golden `(?)` labels can be hovered over for more information about each field.
 
-### Open project dialog
+## Open project dialog
 
 Before displaying the main window, a project directory must be chosen, using a selection dialog.
 
@@ -19,7 +19,7 @@ As soon as a valid folder path is entered, the main application window can be in
 
 On the next program execution, the previously opened path will be pre-filled.
 
-### Main application window
+## Main application window
 
 ![FxUI main window](screenshots/fxui-main-application-window.png)
 
@@ -46,6 +46,6 @@ The executed command can be previewed with the "Preview command" button.
 "Open report" will only show up once the `.profiler/report/index.html` file exists.
 Clicking it calls the system's default application for HTML files (browser).
 
-### Theme
+## Theme
 
 The UI uses the `PrimerDark` theme from [AtlantaFX](https://github.com/mkpaz/atlantafx) as a `userAgentStylesheet`.

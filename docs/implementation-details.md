@@ -1,8 +1,8 @@
-## Implementation details
+# Implementation details
 
 This section gives some more information on how the profiler works in detail.
 
-### Grammar/Parser
+## Grammar/Parser
 The Grammar consists of a reduced set of non-terminal symbols (NTS) that covers the most important aspects
 of the Java 21 syntax tailored for the profiler's use-case (finding the begin and end position of blocks).
 
@@ -22,7 +22,7 @@ and method names in each file and assign them to the blocks in the model.
 Also, package declarations at the beginning of a file will be inherited by each class
 in this file for knowing its fully qualified name.
 
-### Instrumentation
+## Instrumentation
 The tool parses source code files and stores an instrumented copy in the output directory.
 <br/>
 At the beginning of executable code blocks (usually after an opening brace `{`). a `__Counter.inc(X);` statement is
@@ -65,7 +65,7 @@ class Fibonacci {
 }
 ```
 
-### The `__Counter` class
+## The `__Counter` class
 
 To successfully compile a copy of the program with additional `__Counter.inc(x)` statements,
 we need to import the `__Counter` class inside each instrumented file.
@@ -81,11 +81,11 @@ By default, calls to `inc` are not synchronized to speed up runtime performance.
 Using the `-s` option we insert `incSync` statements instead.
 The counters are then kept in an `AtomicLongArray` to ensure exact results for multi-threaded programs.
 
-### Special handling of language features
+## Special handling of language features
 
 Some language syntax required non-trivial special handling.
 
-#### Single-statements
+### Single-statements
 
 We cannot just add a counter-statement to single-statement blocks.
 <br/>
@@ -113,7 +113,7 @@ boolean containsZero(int[][] array) {'__Counter.inc(261);'
 }
 ```
 
-#### Overloaded constructors
+### Overloaded constructors
 
 Java supports multiple “overloaded” constructors in the same class. If we use `super()`
 or `this()` invocations, the language enforces that it must be the first statement in the
@@ -139,13 +139,13 @@ class SmallDog extends Dog {
 }
 ```
 
-#### Anonymous and local classes
+### Anonymous and local classes
 As these full-fledged classes can appear anywhere inside a code block,
 we need need to restore the previous state after parsing and exiting these inner classes.
 For this, the `ParserState` class contains a Stack of methods, onto which we push
 the current one when encountering class declarations inside methods.
 
-#### Brace-less Lambdas
+### Brace-less Lambdas
 
 Especially for stream processing, lambda statements are often used without a method body.
 
@@ -174,7 +174,7 @@ integers.stream()
 
 The compiler will automatically choose the fitting `incLambda` variant to call, depending on the return type.
 
-#### Switch statements and switch expressions
+### Switch statements and switch expressions
 
 Switch statements need a lot of special handling due to their abnormal syntax.
 <br/>
@@ -216,7 +216,7 @@ int sc = switch (statusCode) {
 };
 ```
 
-#### Control flow breaks
+### Control flow breaks
 The keywords `break`, `continue`, `return`, `yield` and `throw` are used to exit a block early.
 As our counters are inserted only at the **beginning** of blocks, we would need another counter
 after every block containing a control flow break statement to correctly show line-hit coverage.

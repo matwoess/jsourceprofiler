@@ -1,4 +1,4 @@
-## Runtime impact
+# Runtime impact
 To evaluate how much the inserted counter statements impact the run-time performance of a program,
 we ran a few benchmarks of the [DaCapo Benchmark Suite](https://dacapobench.sourceforge.net/)
 in three different configurations:

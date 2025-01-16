@@ -1,9 +1,5 @@
 # Introduction
 
-This project was created as part of my master's thesis at the Institute for System Software ([SSW](https://ssw.jku.at/))
-of the Johannes Kepler University ([JKU](https://www.jku.at/)), located in Linz, Austria.
-See the [thesis paper](A_Profiler_for_Java_Programs.pdf) for further details.
-
 The profiler instruments source code directly (as opposed to commonly used bytecode instrumentation)
 by inserting counter-statements at the beginning of every executable code block.
 <br/>

@@ -5,6 +5,7 @@ site_description: |
   It features an optional JavaFX tool-runner GUI.
 
 repo_url: https://github.com/matwoess/jsourceprofiler
+repo_name: matwoess/jsourceprofiler
 
 nav:
   - Introduction: index.md

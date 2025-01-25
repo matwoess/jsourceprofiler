@@ -13,9 +13,9 @@ programs compared to their un-instrumented version:
 ![Relative runtime overhead in the DaCapo benchmarks](screenshots/runtime-impact.png)
 
 Most benchmarks show only a relatively small slowdown to less than 200% run time.
-The h2 program does not show any significant impact as most of its work in performed
+The "h2" program does not show any significant impact as most of its work in performed
 in its derby database library, which is not instrumented.
 The sunflow benchmark (multi-threaded CPU ray-tracing) is the opposite extreme,
 showing a significant 10-fold run time impact when using synchronized counters.
 
-For further analysis and details, see the thesis paper.
+For further analysis and details, see the [thesis paper](https://ssw.jku.at/Teaching/MasterTheses/JavaProfiler/Thesis.pdf).

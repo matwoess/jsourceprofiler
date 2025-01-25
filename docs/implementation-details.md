@@ -4,9 +4,10 @@ This section gives some more information on how the profiler works in detail.
 
 ## Grammar/Parser
 The Grammar consists of a reduced set of non-terminal symbols (NTS) that covers the most important aspects
-of the Java 21 syntax tailored for the profiler's use-case (finding the begin and end position of blocks).
+of the Java 21 syntax tailored for the profiler's use-case: finding the start and end position of blocks.
 
 Using Coco's `ANY` keyword, we over-read non-relevant tokens like:
+
 - access modifiers (`public`, `private`, ... )
 - interfaces that a class `implements` (or superclasses)
 - class level constants and member variables
@@ -16,11 +17,10 @@ Using Coco's `ANY` keyword, we over-read non-relevant tokens like:
 - remaining tokens in a `GenericStatement` up to the semicolon
 - the switch-case label(s), constant(s) and guard clause(s) before the colon or arrow
 
-To build an index of classes and their methods, we have to keep track of class names
-and method names in each file and assign them to the blocks in the model.
-<br/>
-Also, package declarations at the beginning of a file will be inherited by each class
-in this file for knowing its fully qualified name.
+To build an index of classes and their methods, we have to keep track of class and method names 
+in each file and assign them to the block objects in the model.
+
+Package declarations at the beginning of a file will be propagated to each class to determine its fully qualified name.
 
 ## Instrumentation
 The tool parses source code files and stores an instrumented copy in the output directory.
@@ -69,27 +69,29 @@ class Fibonacci {
 
 To successfully compile a copy of the program with additional `__Counter.inc(x)` statements,
 we need to import the `__Counter` class inside each instrumented file.
-The class is contained in a root-level `auxiliary` package and can be imported at any hierarchy level.
+The class is contained in a root-level `auxiliary` package and can be imported at any level in the hierarchy.
 
 A compiled `.class` version of `__Counter` is extracted from the tool JAR and copied
 to the `instrumented/` and `classes/` output directories.
 
-The class stores an array the size of all (number of) found blocks in the entire project.
-Every `__Counter.inc(idx)` statement includes the block-index to increment.
+The counter class stores an array the size of all (number of) all found blocks in the entire project.
+Every `__Counter.inc(idx)` statement includes the block index to increment.
 
 By default, calls to `inc` are not synchronized to speed up runtime performance.
-Using the `-s` option we insert `incSync` statements instead.
+Using the `--synchronized` option we insert `incSync` statements instead.
 The counters are then kept in an `AtomicLongArray` to ensure exact results for multi-threaded programs.
 
 ## Special handling of language features
 
-Some language syntax required non-trivial special handling.
+Some language syntax constructs required special non-trivial handling during instrumentation.
 
 ### Single-statements
 
-We cannot just add a counter-statement to single-statement blocks.
+We cannot just add a counter-statement to brace-less single-statement blocks.
 <br/>
-In this case, we have to wrap the block in braces for it to compile.
+They have to be wrapped in braces for it to compile successfully.
+
+The following example:
 
 ```java
 boolean containsZero(int[][] array) {
@@ -101,7 +103,7 @@ boolean containsZero(int[][] array) {
 }
 ```
 
-would require insertion of:
+would require insertions of:
 
 ```java
 boolean containsZero(int[][] array) {'__Counter.inc(261);'
@@ -142,12 +144,12 @@ class SmallDog extends Dog {
 ### Anonymous and local classes
 As these full-fledged classes can appear anywhere inside a code block,
 we need need to restore the previous state after parsing and exiting these inner classes.
-For this, the `ParserState` class contains a Stack of methods, onto which we push
+For this, the `ParserState` class contains a Stack for methods, onto which we push
 the current one when encountering class declarations inside methods.
 
 ### Brace-less Lambdas
 
-Especially for stream processing, lambda statements are often used without a method body.
+Lambda statements are often used without a method body, especially for stream processing.
 
 Given the example:
 
@@ -163,7 +165,7 @@ We need a clever way to observe how often each lambda statement was executed.
 The `__Counter` class contains a special `incLambda` method that wraps these lambdas
 as an argument into either a generic anonymous `Runnable` or `Supplier<T>`.
 
-The instrumented version will look like this:
+The instrumented version would look like this:
 
 ```java
 integers.stream()
@@ -178,17 +180,17 @@ The compiler will automatically choose the fitting `incLambda` variant to call, 
 
 Switch statements need a lot of special handling due to their abnormal syntax.
 <br/>
-The switch block itself is not executable, case blocks are not enclosed in braces.
+The switch block itself is not executable, `case` blocks are not enclosed in braces.
 <br/>
-Switch *expression* (since Java 14) have the `yield` statement to return a value.
+Switch **expression** (introduced in Java 14) have the `yield` statement to return a value.
 <br/>
-We also can use arrow-cases (`->` like lambdas) to omit the `break`, in which case
+We also can use arrow-cases (same `->` operator as for lambdas) to omit the `break`, in which case
 there's either a curly-brace block or a single statement.
 
 For the case of *single-statement* arrow-case expressions we need to wrap
-the block in braces and add a `yield` keyword after.
+the block in braces and add a `yield` keyword after its statement.
 <br/>
-In case a branch throws an exception, `yield` must **not** be added.
+In case a branch throws an exception, `yield` **must not** be added.
 
 The following example:
 
@@ -203,7 +205,7 @@ int sc = switch (statusCode) {
 };
 ```
 
-is as following instrumented like this:
+is instrumented as following:
 
 ```java
 StatusCode statusCode = ...;
@@ -221,10 +223,10 @@ The keywords `break`, `continue`, `return`, `yield` and `throw` are used to exit
 As our counters are inserted only at the **beginning** of blocks, we would need another counter
 after every block containing a control flow break statement to correctly show line-hit coverage.
 
-We took a different approach by introducing "code regions" to group statements with the same hit count.
+We took a different approach by introducing "code regions" to group together statements with the same hit count.
 A code block is split into two regions when encountering an inner block.
 If the inner block contains a control flow break, we subtract the hit count of the inner blocks
-from the first region's hits to calculate how frequently the second region was executed.
+from the previous region's hits to calculate how frequently the next region was executed.
 
 ```java
 275     | static int fib(int n) {

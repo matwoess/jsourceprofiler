@@ -1,0 +1,954 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="jsourceprofiler is a command-line profiler for Java programs using source code instrumentation.
+The single JAR-file utility generates HTML reports enabling hotspot analysis and providing coverage with line counts. 
+It features an optional JavaFX tool-runner GUI.
+">
+      
+      
+      
+      
+        <link rel="prev" href="../report/">
+      
+      
+        <link rel="next" href="../runtime-impact/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Implementation Details - jsourceprofiler Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#implementation-details" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="jsourceprofiler Docs" class="md-header__button md-logo" aria-label="jsourceprofiler Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            jsourceprofiler Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Implementation Details
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 2C5.13 2 2 5.13 2 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7M6 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H6zm13-8h-2l-3.2 9h1.9l.7-2h3.2l.7 2h1.9zm-2.15 5.65L18 15l1.15 3.65z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 6a6 6 0 0 1 6 6c0 2.22-1.21 4.16-3 5.2V19a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1.8c-1.79-1.04-3-2.98-3-5.2a6 6 0 0 1 6-6m2 15v1a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1zm6-10h3v2h-3zM1 11h3v2H1zM13 1v3h-2V1zM4.92 3.5l2.13 2.14-1.42 1.41L3.5 4.93zm12.03 2.13 2.12-2.13 1.43 1.43-2.13 2.12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="yellow"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/matwoess/jsourceprofiler" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    matwoess/jsourceprofiler
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="jsourceprofiler Docs" class="md-nav__button md-logo" aria-label="jsourceprofiler Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    jsourceprofiler Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/matwoess/jsourceprofiler" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    matwoess/jsourceprofiler
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fxui/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JavaFX UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../report/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Implementation Details
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Implementation Details
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#grammarparser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grammar/Parser
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instrumentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instrumentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-__counter-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      The __Counter class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#special-handling-of-language-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Special handling of language features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Special handling of language features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single-statements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overloaded-constructors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overloaded constructors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anonymous-and-local-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anonymous and local classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brace-less-lambdas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Brace-less Lambdas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-statements-and-switch-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch statements and switch expressions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-flow-breaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control flow breaks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-impact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Runtime Impact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../limitations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Limitations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dependencies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#grammarparser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grammar/Parser
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instrumentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instrumentation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-__counter-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      The __Counter class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#special-handling-of-language-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Special handling of language features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Special handling of language features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single-statements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overloaded-constructors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overloaded constructors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anonymous-and-local-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anonymous and local classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brace-less-lambdas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Brace-less Lambdas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-statements-and-switch-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch statements and switch expressions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-flow-breaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control flow breaks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="implementation-details">Implementation details</h1>
+<p>This section gives some more information on how the profiler works in detail.</p>
+<h2 id="grammarparser">Grammar/Parser</h2>
+<p>The Grammar consists of a reduced set of non-terminal symbols (NTS) that covers the most important aspects
+of the Java 21 syntax tailored for the profiler's use-case: finding the start and end position of blocks.</p>
+<p>Using Coco's <code>ANY</code> keyword, we over-read non-relevant tokens like:</p>
+<ul>
+<li>access modifiers (<code>public</code>, <code>private</code>, ... )</li>
+<li>interfaces that a class <code>implements</code> (or superclasses)</li>
+<li>class level constants and member variables</li>
+<li>generic type definitions with angle brackets <code>&lt;Type1&lt;Type2,...&gt;, ...&gt;</code></li>
+<li>array initializer blocks (starting with <code>{</code>), but we do not insert counters here</li>
+<li>a method’s argument list (within the parentheses)</li>
+<li>remaining tokens in a <code>GenericStatement</code> up to the semicolon</li>
+<li>the switch-case label(s), constant(s) and guard clause(s) before the colon or arrow</li>
+</ul>
+<p>To build an index of classes and their methods, we have to keep track of class and method names 
+in each file and assign them to the block objects in the model.</p>
+<p>Package declarations at the beginning of a file will be propagated to each class to determine its fully qualified name.</p>
+<h2 id="instrumentation">Instrumentation</h2>
+<p>The tool parses source code files and stores an instrumented copy in the output directory.
+<br/>
+At the beginning of executable code blocks (usually after an opening brace <code>{</code>). a <code>__Counter.inc(X);</code> statement is
+inserted.</p>
+<p>A program like:</p>
+<pre><code class="language-java">class Fibonacci {
+  static int fib(int n) {
+    if (n &lt;= 1) {
+      return n;
+    }
+    return fib(n - 1) + fib(n - 2);
+  }
+  public static void main(String[]args) {
+    int N = Integer.parseInt(args[0]);
+    for (int i = 1; i &lt; N; i++) {
+      System.out.print(fib(i) + &quot; &quot;);
+    }
+  }
+}
+</code></pre>
+<p>Would look in its instrumented version something like this:</p>
+<pre><code class="language-java">'import auxiliary.__Counter;'
+class Fibonacci {
+  static int fib(int n) {'__Counter.inc(0);'
+    if (n &lt;= 1) {'__Counter.inc(1);'
+      return n;
+    }
+    return fib(n - 1) + fib(n - 2);
+  }
+  public static void main(String[] args) {'__Counter.inc(2);'
+    int N = Integer.parseInt(args[0]);
+    for (int i = 1; i &lt; N; i++) {'__Counter.inc(3);'
+      System.out.print(fib(i) + &quot; &quot;);
+    }
+  }
+}
+</code></pre>
+<h2 id="the-__counter-class">The <code>__Counter</code> class</h2>
+<p>To successfully compile a copy of the program with additional <code>__Counter.inc(x)</code> statements,
+we need to import the <code>__Counter</code> class inside each instrumented file.
+The class is contained in a root-level <code>auxiliary</code> package and can be imported at any level in the hierarchy.</p>
+<p>A compiled <code>.class</code> version of <code>__Counter</code> is extracted from the tool JAR and copied
+to the <code>instrumented/</code> and <code>classes/</code> output directories.</p>
+<p>The counter class stores an array the size of all (number of) all found blocks in the entire project.
+Every <code>__Counter.inc(idx)</code> statement includes the block index to increment.</p>
+<p>By default, calls to <code>inc</code> are not synchronized to speed up runtime performance.
+Using the <code>--synchronized</code> option we insert <code>incSync</code> statements instead.
+The counters are then kept in an <code>AtomicLongArray</code> to ensure exact results for multi-threaded programs.</p>
+<h2 id="special-handling-of-language-features">Special handling of language features</h2>
+<p>Some language syntax constructs required special non-trivial handling during instrumentation.</p>
+<h3 id="single-statements">Single-statements</h3>
+<p>We cannot just add a counter-statement to brace-less single-statement blocks.
+<br/>
+They have to be wrapped in braces for it to compile successfully.</p>
+<p>The following example:</p>
+<pre><code class="language-java">boolean containsZero(int[][] array) {
+  if (array == null) return false;
+  for (int i = 0; i &lt; array.length; i++)
+    for (int j = 0; j &lt; array[i].length; j++)
+      if (array[i][j] == 0) return true;
+  return false;
+}
+</code></pre>
+<p>would require insertions of:</p>
+<pre><code class="language-java">boolean containsZero(int[][] array) {'__Counter.inc(261);'
+  if (array == null)'{__Counter.inc(262);' return false;'}'
+  for (int i = 0; i &lt; array.length; i++)'{__Counter.inc(263);'
+    for (int j = 0; j &lt; array[i].length; j++)'{__Counter.inc(264);'
+      if (array[i][j] == 0)'{__Counter.inc(265);' return true;'}}}'
+  return false;
+}
+</code></pre>
+<h3 id="overloaded-constructors">Overloaded constructors</h3>
+<p>Java supports multiple “overloaded” constructors in the same class. If we use <code>super()</code>
+or <code>this()</code> invocations, the language enforces that it must be the first statement in the
+method body.
+This makes it impossible to insert a <code>__Counter.inc(X);</code> statement right after the method's opening brace.</p>
+<p>To handle this special case, we need to keep track of the <strong>end</strong> position of possible first <code>this/super</code> calls
+in constructors.
+The counter-statement is added only after this call.</p>
+<pre><code class="language-java">class SmallDog extends Dog {
+  public SmallDog(String name, int age) {
+    super(name, age);'__Counter.inc(3);'
+    size = Size.SMALL;
+    super.speak();
+  }
+  public SmallDog(String name, int age, Size s) {
+    this(n, age);'__Counter.inc(4);'
+    this.size = s;
+  }
+  ...
+}
+</code></pre>
+<h3 id="anonymous-and-local-classes">Anonymous and local classes</h3>
+<p>As these full-fledged classes can appear anywhere inside a code block,
+we need need to restore the previous state after parsing and exiting these inner classes.
+For this, the <code>ParserState</code> class contains a Stack for methods, onto which we push
+the current one when encountering class declarations inside methods.</p>
+<h3 id="brace-less-lambdas">Brace-less Lambdas</h3>
+<p>Lambda statements are often used without a method body, especially for stream processing.</p>
+<p>Given the example:</p>
+<pre><code class="language-java">integers.stream()
+        .peek(x -&gt; System.out.println(x))
+        .filter(x -&gt; x % 2 == 0)
+        .sum();
+</code></pre>
+<p>We need a clever way to observe how often each lambda statement was executed.</p>
+<p>The <code>__Counter</code> class contains a special <code>incLambda</code> method that wraps these lambdas
+as an argument into either a generic anonymous <code>Runnable</code> or <code>Supplier&lt;T&gt;</code>.</p>
+<p>The instrumented version would look like this:</p>
+<pre><code class="language-java">integers.stream()
+        .peek(x -&gt;'__Counter.incLambda(61, () -&gt;' System.out.println(x)')')
+        .filter(x -&gt;'__Counter.incLambda(62, () -&gt;'  x % 2 == 0')')
+        .sum();
+</code></pre>
+<p>The compiler will automatically choose the fitting <code>incLambda</code> variant to call, depending on the return type.</p>
+<h3 id="switch-statements-and-switch-expressions">Switch statements and switch expressions</h3>
+<p>Switch statements need a lot of special handling due to their abnormal syntax.
+<br/>
+The switch block itself is not executable, <code>case</code> blocks are not enclosed in braces.
+<br/>
+Switch <strong>expression</strong> (introduced in Java 14) have the <code>yield</code> statement to return a value.
+<br/>
+We also can use arrow-cases (same <code>-&gt;</code> operator as for lambdas) to omit the <code>break</code>, in which case
+there's either a curly-brace block or a single statement.</p>
+<p>For the case of <em>single-statement</em> arrow-case expressions we need to wrap
+the block in braces and add a <code>yield</code> keyword after its statement.
+<br/>
+In case a branch throws an exception, <code>yield</code> <strong>must not</strong> be added.</p>
+<p>The following example:</p>
+<pre><code class="language-java">StatusCode statusCode = ...;
+int sc = switch (statusCode) {
+  case OK -&gt; 200;
+  case UNAUTHORIZED -&gt; 401;
+  case FORBIDDEN -&gt; 403;
+  case NOTFOUND -&gt; { yield 404; }
+  default -&gt; throw new RuntimeException(&quot;invalid code&quot;);
+};
+</code></pre>
+<p>is instrumented as following:</p>
+<pre><code class="language-java">StatusCode statusCode = ...;
+int sc = switch (statusCode) {
+  case OK -&gt;'{__Counter.inc(5); yield' 200;'}'
+  case UNAUTHORIZED -&gt;'{__Counter.inc(6); yield' 401;'}'
+  case FORBIDDEN -&gt;'{__Counter.inc(7); yield' 403;'}'
+  case NOTFOUND -&gt; {'__Counter.inc(8);' yield 404; }
+  default -&gt; '{__Counter.inc(9);' throw new RuntimeException(&quot;invalid code&quot;);'}'
+};
+</code></pre>
+<h3 id="control-flow-breaks">Control flow breaks</h3>
+<p>The keywords <code>break</code>, <code>continue</code>, <code>return</code>, <code>yield</code> and <code>throw</code> are used to exit a block early.
+As our counters are inserted only at the <strong>beginning</strong> of blocks, we would need another counter
+after every block containing a control flow break statement to correctly show line-hit coverage.</p>
+<p>We took a different approach by introducing "code regions" to group together statements with the same hit count.
+A code block is split into two regions when encountering an inner block.
+If the inner block contains a control flow break, we subtract the hit count of the inner blocks
+from the previous region's hits to calculate how frequently the next region was executed.</p>
+<pre><code class="language-java">275     | static int fib(int n) {
+275     |   if (n &lt;= 1)
+275 142 |     return n;
+275     |   return fib(n - 1) + fib(n - 2); // 275-142 = 133
+        | }
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>

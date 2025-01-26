@@ -1,6 +1,6 @@
-# FxUI
+# JavaFX UI
 
-An easy-to-use graphical application was created (using th [JavaFX](https://openjfx.io/) toolkit), to configure parameters and arguments
+An easy-to-use graphical application was created (using the [JavaFX](https://openjfx.io/) toolkit), to configure parameters and arguments
 for the command-line tool. It automatically calls the tool in a new terminal window.
 
 Golden <span style="color: darkgoldenrod;">(?)</span> labels can be hovered over for more information about each field.
@@ -39,7 +39,7 @@ The tree highlights important items in color:
 The top menu bar allows rebuilding the file tree and saving or restoring currently set parameters (will be saved in the
 output directory as `parameters.dat`).
 
-When clicking "Run tool", a system-native terminal will be opened, to show program output and
+When clicking <kbd>Run tool</kbd>, a system-native terminal will be opened, to show program output and
 to allow user input (useful for interactive programs).
 The UI allows to customize the terminal application to use.
 

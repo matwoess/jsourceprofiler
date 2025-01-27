@@ -507,19 +507,19 @@ It features an optional JavaFX tool-runner GUI.
 
 <h1 id="runtime-impact">Runtime impact</h1>
 <p>To evaluate how much the inserted counter statements impact the run-time performance of a program,
-we ran a few benchmarks of the <a href="https://dacapobench.sourceforge.net/">DaCapo Benchmark Suite</a>
+we ran a few benchmarks from the <a href="https://dacapobench.sourceforge.net/">DaCapo Benchmark Suite</a>
 in three different configurations:</p>
 <ul>
-<li>"orig" — The original unmodified benchmark project without instrumentation</li>
+<li>"orig" — The original, unmodified benchmark program without instrumentation</li>
 <li>"instr" — A version with counter-increment statements added to every code block</li>
-<li>"sync" — The benchmark with synchronized counters, using the <code>AtomicLongArray</code></li>
+<li>"sync" — The benchmark with synchronized counters (using the <code>AtomicLongArray</code>)</li>
 </ul>
 <p>The following figure shows the average relative run-time overhead of seven benchmarks
 programs compared to their un-instrumented version:</p>
 <p><img alt="Relative runtime overhead in the DaCapo benchmarks" src="../screenshots/runtime-impact.png" /></p>
 <p>Most benchmarks show only a relatively small slowdown to less than 200% run time.
 The "h2" program does not show any significant impact as most of its work in performed
-in its derby database library, which is not instrumented.
+in its derby database library, which is <strong>not</strong> instrumented.
 The sunflow benchmark (multi-threaded CPU ray-tracing) is the opposite extreme,
 showing a significant 10-fold run time impact when using synchronized counters.</p>
 <p>For further analysis and details, see the <a href="https://ssw.jku.at/Teaching/MasterTheses/JavaProfiler/Thesis.pdf">thesis paper</a>.</p>

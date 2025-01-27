@@ -28,7 +28,7 @@ Setting this parameter instructs the tool to parse all Java files in the given d
 For frequent use, it is recommended to create a shell script or batch file that contains the necessary commands.
 ```shell title="~/bin/profile"
 #!/usr/bin/env bash
-java -jar ~/.local/lib/profiler-0.11.2.jar $@
+java -jar ~/.local/lib/profiler-0.12.0.jar $@
 # java -> /usr/lib/jvm/java-21-openjdk/bin/java
 ```
 
@@ -105,29 +105,14 @@ This will parse all `*.java` files in the sources directory and create an instru
 The first positional parameter to the tool specifies the class containing the main entry point. 
 Its instrumented copy will be used to run the program.
 
-## Profiler tool workflow
+### Run modes and custom compilation
+In case the project cannot be compiled with `javac Main.java`, the two additional run modes can be used:
 
-After parsing all files the `.profiler/metadata.dat` file will be created, containing information about
-every found code block like its begin/end position, its parent method/class and other relevant data to create a report.
-
-The tool will then automatically compile the instrumented version using the `javac` compiler.
-```shell title="(the tool executes this command internally)"
-javac -cp .profiler/instrumented -d .profiler/classes Main.java
+```shell { hl_lines="2 3" linenums="1" }
+profile --instrument-only src
+javac -cp .profiler/instrumented -customArg .profiler/instrumented/Main.java
+java -cp .profiler/instrumented Main
+profile --generate-report
 ```
-(whereas `Main.java` is the specified main file)
-
-The Java compiler finds referenced Java files (used in Main) itself and compile them also
-into (instrumented) `.class` files. The compiled classes will be written to the `.profiler/classes/` directory.
-
-Next, the `java` binary is used to execute the specified class by name (without the `.java` extension)
-and with the given arguments:
-```shell title="(the tool executes this command internally)"
-java -cp .profiler/classes Main arg1 arg2 ...
-```
-Executing the instrumented files, automatically stores the hit-counter values in `.profiler/counts.dat`
-as soon as the program execution is finished and the JVM shuts down.
-
-Finally, the metadata and counts will be used to create the report inside `.profiler/report/`.
-
-A link to the report will be created in the current working directory, pointing to `.profiler/report/index.html`.
-On Linux or macOS it will be a symbolic link, on Windows a `report.lnk` shortcut link.
+This way the `-customArg` can be passed to the `javac` command. 
+Instead of lines 2-3 any other custom command like `ant`/`gradlew`/.. can be substituted.

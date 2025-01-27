@@ -11,6 +11,7 @@ nav:
   - Introduction: index.md
   - Getting Started: getting-started.md
   - Usage: usage.md
+  - Tool Workflow: workflow.md
   - JavaFX UI: fxui.md
   - Report: report.md
   - Implementation Details: implementation-details.md

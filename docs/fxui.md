@@ -7,11 +7,11 @@ Golden <span style="color: darkgoldenrod;">(?)</span> labels can be hovered over
 
 ## Open project dialog
 
-Before displaying the main window, a project directory must be chosen, using a selection dialog.
+Before displaying the main application view, a project directory must be chosen, using the initial selection dialog.
 
 ![FxUI project selection dialog](screenshots/fxui-project-selection-dialog.png)
 
-Clicking <kbd>Select</kbd> will show the system's native dialog to choose a folder.
+Clicking <kbd>Select</kbd> will open the system's native file-picker dialog to choose a folder.
 <br/>
 Alternatively, the path can be entered directly into the text field.
 
@@ -32,22 +32,22 @@ on a tree item.
 
 The tree highlights important items in color:
 
-- <span style="color: blue;">blue</span> for the selected sources directory,
+- <span style="color: royalblue;">blue</span> for the selected sources directory,
 - <span style="color: green;">green</span> for selected main file.
 - <span style="color: brown;">brown</span> for the tool's (hidden) output directory
 
 The top menu bar allows rebuilding the file tree and saving or restoring currently set parameters (will be saved in the
 output directory as `parameters.dat`).
 
-When clicking <kbd>Run tool</kbd>, a system-native terminal will be opened, to show program output and
-to allow user input (useful for interactive programs).
-The UI allows to customize the terminal application to use.
+When clicking <kbd>Run tool</kbd>, a system-native terminal will be launched, showing the program output and
+allowing user input (useful for interactive programs).
+The terminal application to use can be customized in the user interface.
 
-The executed command can be previewed with the <kbd>Preview command</kbd> button.
+The effectively executed terminal command can be previewed with the <kbd>Preview command</kbd> button.
 
 <kbd>Open report</kbd> will only show up once the `.profiler/report/index.html` file exists.
-Clicking it calls the system's default application for HTML files (usually the browser).
+Clicking it opens the report in the system's default application for HTML files (usually a browser).
 
 ## JavaFX Theme
 
-The UI uses the `PrimerDark` theme from [AtlantaFX](https://github.com/mkpaz/atlantafx) as a `userAgentStylesheet`.
+The UI currently uses the `PrimerDark` theme from [AtlantaFX](https://github.com/mkpaz/atlantafx) as a `userAgentStylesheet`.

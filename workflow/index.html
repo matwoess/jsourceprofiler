@@ -633,7 +633,7 @@ It features an optional JavaFX tool-runner GUI.
 <p>All instrumented source file copies will be written to the <code>.profiler/instrumented/</code> directory.</p>
 <h2 id="compile">Compile</h2>
 <p>The tool will then automatically compile the instrumented version using the <code>javac</code> compiler.
-<div class="language-shell highlight"><span class="filename">(the tool executes this command internally)</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>javac<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>-d<span class="w"> </span>.profiler/classes<span class="w"> </span>App.java
+<div class="language-shell highlight"><span class="filename">(the tool executes this command internally)</span><pre><span></span><code><span id="__span-0-1">javac<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>-d<span class="w"> </span>.profiler/classes<span class="w"> </span>App.java
 </span></code></pre></div>
 (whereas <code>App.java</code> is the specified main file)</p>
 <p>The Java compiler finds referenced Java files (used in <code>App</code>) automatically and compiles them next
@@ -644,7 +644,7 @@ the pre-compiled <code>auxiliary</code> package is extracted and copied to the <
 <h2 id="execute">Execute</h2>
 <p>Next, the <code>java</code> binary is used to execute the specified class by name (without the <code>.java</code> extension)
 and with the given arguments:
-<div class="language-shell highlight"><span class="filename">(the tool executes this command internally)</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>java<span class="w"> </span>-cp<span class="w"> </span>.profiler/classes<span class="w"> </span>App<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
+<div class="language-shell highlight"><span class="filename">(the tool executes this command internally)</span><pre><span></span><code><span id="__span-1-1">java<span class="w"> </span>-cp<span class="w"> </span>.profiler/classes<span class="w"> </span>App<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
 </span></code></pre></div></p>
 <p>Again, for this to work the <code>auxiliary</code> package is copied to the <code>.profiler/classes/</code> directory.</p>
 <p>Executing the instrumented files, automatically stores the hit-counter values in <code>.profiler/counts.dat</code>

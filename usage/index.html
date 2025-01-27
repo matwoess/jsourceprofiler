@@ -797,8 +797,8 @@ It features an optional JavaFX tool-runner GUI.
 
 <h1 id="usage">Usage</h1>
 <p>The tool defines the following command line interface:</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Usage: profiler [options] &lt;main file&gt; [program args]  
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Or   : profiler [options] &lt;run mode&gt;
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-0-1">Usage: profiler [options] &lt;main file&gt; [program args]  
+</span><span id="__span-0-2">Or   : profiler [options] &lt;run mode&gt;
 </span></code></pre></div>
 The <code>java</code> and <code>javac</code> JDK binaries have to be included in the system environment path for the tool to function correctly.
 The absolute file system location of the executables is not determined automatically. 
@@ -815,9 +815,9 @@ If the program-to-profile consists of multiple class source files the <code>--so
 Setting this parameter instructs the tool to parse all Java files in the given directory and its subdirectories.</p>
 <h2 id="shell-script">Shell script</h2>
 <p>For frequent use, it is recommended to create a shell script or batch file that contains the necessary commands.
-<div class="language-shell highlight"><span class="filename">~/bin/profile</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="ch">#!/usr/bin/env bash</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>java<span class="w"> </span>-jar<span class="w"> </span>~/.local/lib/profiler-0.12.0.jar<span class="w"> </span><span class="nv">$@</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># java -&gt; /usr/lib/jvm/java-21-openjdk/bin/java</span>
+<div class="language-shell highlight"><span class="filename">~/bin/profile</span><pre><span></span><code><span id="__span-1-1"><span class="ch">#!/usr/bin/env bash</span>
+</span><span id="__span-1-2">java<span class="w"> </span>-jar<span class="w"> </span>~/.local/lib/profiler-0.12.0.jar<span class="w"> </span><span class="nv">$@</span>
+</span><span id="__span-1-3"><span class="c1"># java -&gt; /usr/lib/jvm/java-21-openjdk/bin/java</span>
 </span></code></pre></div></p>
 <p>This script can then be placed in a directory that is included in the system's PATH variable.
 It allows the tool to be called from any location in the terminal by its file name (e.g. <code>profile</code>).</p>
@@ -827,7 +827,7 @@ It allows the tool to be called from any location in the terminal by its file na
 <h3 id="-sources-directory"><code>--sources-directory</code></h3>
 <p>If the project-to-profile consists of two or more (linked) Java files, the sources directory has to be specified.
 This is done with the <code>-d</code> or <code>--sources-directory</code> option:
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>profile<span class="w"> </span>-d<span class="w"> </span>src/main/java/<span class="w"> </span>src/main/java/subfolder/Main.java
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1">profile<span class="w"> </span>-d<span class="w"> </span>src/main/java/<span class="w"> </span>src/main/java/subfolder/Main.java
 </span></code></pre></div></p>
 <p>Using this option, all <code>.java</code> files inside <code>src/main/java/</code> will be parsed, instrumented and copied to the
 <code>.profiler/instrumented</code> directory. The relative folder-structure is replicated to ensure successful compilation 
@@ -857,25 +857,25 @@ For it to succeed the <code>metadata.dat</code> and <code>counts.dat</code> file
 <h2 id="sample-usage">Sample usage</h2>
 <h3 id="single-file-projects">Single file projects</h3>
 <p>If the entire program-to-profile is contained in a <em>single</em> Java source file, the tool can be used as following:
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>profile<span class="w"> </span>Main.java<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1">profile<span class="w"> </span>Main.java<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
 </span></code></pre></div>
 This will parse, instrument and compile the given file, execute the program with the given arguments, and create a report.</p>
 <h3 id="multi-file-projects">Multi-file projects</h3>
 <p>If the program consists of multiple Java files, the sources directory has to be specified:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>profile<span class="w"> </span>-d<span class="w"> </span>src/<span class="w"> </span>src/Main.java<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1">profile<span class="w"> </span>-d<span class="w"> </span>src/<span class="w"> </span>src/Main.java<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
 </span></code></pre></div>
 <p>This will parse all <code>*.java</code> files in the sources directory and create an instrumented copy.
 The first positional parameter to the tool specifies the class containing the main entry point. 
 Its instrumented copy will be used to run the program.</p>
 <h3 id="run-modes-and-custom-compilation">Run modes and custom compilation</h3>
 <p>In case the project cannot be compiled with <code>javac Main.java</code>, the two additional run modes can be used:</p>
-<p><div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
-<span class="normal"><a href="#__codelineno-5-2">2</a></span>
-<span class="normal"><a href="#__codelineno-5-3">3</a></span>
-<span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>profile<span class="w"> </span>--instrument-only<span class="w"> </span>src
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="hll">javac<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>-customArg<span class="w"> </span>.profiler/instrumented/Main.java
-</span></span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="hll">java<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>Main
-</span></span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>profile<span class="w"> </span>--generate-report
+<p><div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1">profile<span class="w"> </span>--instrument-only<span class="w"> </span>src
+</span><span id="__span-5-2"><span class="hll">javac<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>-customArg<span class="w"> </span>.profiler/instrumented/Main.java
+</span></span><span id="__span-5-3"><span class="hll">java<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>Main
+</span></span><span id="__span-5-4">profile<span class="w"> </span>--generate-report
 </span></code></pre></div></td></tr></table></div>
 This way the <code>-customArg</code> can be passed to the <code>javac</code> command. 
 Instead of lines 2-3 any other custom command like <code>ant</code>/<code>gradlew</code>/.. can be substituted.</p>

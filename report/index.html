@@ -326,6 +326,26 @@ It features an optional JavaFX tool-runner GUI.
   
   
     <li class="md-nav__item">
+      <a href="../workflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tool Workflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../fxui/" class="md-nav__link">
         
   
@@ -578,9 +598,9 @@ It features an optional JavaFX tool-runner GUI.
 
 
 <h1 id="report">Report</h1>
-<p>In the default (or report-only) run modes an HTML report will be generated inside the output directory.
-It is stored in the <code>.profiler/report/</code> folder. The <code>index.html</code> file can be opened in a browser to view it.</p>
-<p>Additionally, a symbolic link or Windows shortcut will be created in the current working directory to quickly open the report.</p>
+<p>The profiler generates an HTML report inside the <code>.profiler/report/</code> output directory. 
+The <code>index.html</code> file can be opened in a browser to view it.</p>
+<p>Additionally, a symbolic link or Windows shortcut will be created in the current working directory linking to the index file.</p>
 <h2 id="classes-overview-indexhtml">Classes overview (index.html)</h2>
 <p>The main index file lists all classes found during parsing.</p>
 <p><img alt="Report classes overview" src="../screenshots/report-class-overview.png" /></p>
@@ -590,41 +610,41 @@ At the bottom of the list we find rarely or never used classes.</p>
 <p>Two additional metrics are available:</p>
 <ul>
 <li>the method coverage in percent</li>
-<li>and the hit-count of the "hottest" block inside the whole class</li>
+<li>the hit-count of the "hottest" block inside the entire class</li>
 </ul>
 <p>The columns are clickable and allow re-sorting of the rows by an alternative metric.
 <br/>
 Clicking on the class name will open the "Methods" index for this class.
 <br/>
-By clicking on the source file link, we can jump directly to the source file detail report.</p>
+By clicking on the source file link, we can jump directly to the source file detail view.</p>
 <h2 id="methods-overview-index_classnamehtml">Methods overview (index_ClassName.html)</h2>
 <p>A separate method index is created for each <em>top-level</em> class.
 <br/>
 It lists all (non-abstract) methods, sorted by invocation count.</p>
 <p><img alt="Report methods overview" src="../screenshots/report-method-overview.png" /></p>
-<p>The heading displays the fully qualified name of the class.</p>
+<p>The heading displays the fully-qualified name of the class (including package prefix).</p>
 <p>Methods of inner classes are shown with the Java class file syntax: <code>Outer$Inner::Method</code>.
-<br/>
-Anonymous and local classes get a numbered name <code>Outer$3::Method</code>, just like in the compiled class files.</p>
-<p>Clicking on a method name will jump into the source code view and jump to the line number of the method's declaration.</p>
-<p>Browser-back or a button on the top can be used to return to the class overview page.</p>
+Anonymous and local classes get a numbered name <code>Outer$3::Method</code>, just like the compiled Java class files.</p>
+<p>Clicking on a method name will jump into the source code view, directly to the line number of the method's declaration.</p>
+<p>Browser-back or the button on top of the file can be used to return to the class overview page.</p>
 <h2 id="source-file-detail-view-javafilenamehtml">Source file detail view (JavaFileName.html)</h2>
 <p>For each Java file, an annotated source code file is generated inside <code>.profiler/report/source/</code>.
 It can be used to explore the methods and statements of each class and in detail and get coverage information.</p>
 <p>A small <a href="https://jquery.com/">jQuery</a> script <a href="https://github.com/matwoess/jsourceprofiler/tree/main/jsourceprofiler-tool/src/main/resources/js/highlighter.js">file</a> initializes
-colors for relevant sections and dynamically updates them on mouse hover.</p>
+colors for relevant sections and dynamically updates them on mouse hover.
+Syntax highlighting is provided by <a href="https://highlightjs.org/">highlight.js</a>. 
+The line numbers are added by pure CSS and the hit-counter column is created dynamically on page-load.</p>
 <p><img alt="Report source file" src="../screenshots/report-source-view.png" /></p>
 <p>Code blocks that have been entered at least once during program execution
-are highlighted in <span style="color: green">green</span>.
-Never-covered blocks are displayed with a <span style="color: red">red</span> background color.</p>
+are highlighted in <span style="color: lightgreen">green</span>.
+Never-covered blocks are displayed with a <span style="color: indianred">red</span> background color.</p>
 <p>Statements with the same hit count are grouped into "code regions".
-<br/>
 These regions are shown in a darker, more opaque green and red (depending on their coverage status).</p>
 <p>The column, to the left of the line numbers, contains the region's hit counts for each line.
 <br/>
 If multiple code regions start in the same line, the hits are shown stacked next to each other.</p>
 <p>Hovering over a block or region will highlight the entire block in
-<span style="color: yellow">yellow</span> and statements of the current region in
+<span style="color: gold">yellow</span> and statements of the current region in
 <span style="color: orange">orange</span>.
 The current region's code will also become bold until moving the mouse away from it.
 Additionally, a popup will show the number of hits from the current block or region.</p>

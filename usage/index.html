@@ -17,7 +17,7 @@ It features an optional JavaFX tool-runner GUI.
         <link rel="prev" href="../getting-started/">
       
       
-        <link rel="next" href="../fxui/">
+        <link rel="next" href="../workflow/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -463,17 +463,17 @@ It features an optional JavaFX tool-runner GUI.
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#profiler-tool-workflow" class="md-nav__link">
+          <li class="md-nav__item">
+  <a href="#run-modes-and-custom-compilation" class="md-nav__link">
     <span class="md-ellipsis">
-      Profiler tool workflow
+      Run modes and custom compilation
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -481,6 +481,26 @@ It features an optional JavaFX tool-runner GUI.
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflow/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tool Workflow
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -743,17 +763,17 @@ It features an optional JavaFX tool-runner GUI.
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#profiler-tool-workflow" class="md-nav__link">
+          <li class="md-nav__item">
+  <a href="#run-modes-and-custom-compilation" class="md-nav__link">
     <span class="md-ellipsis">
-      Profiler tool workflow
+      Run modes and custom compilation
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -796,7 +816,7 @@ Setting this parameter instructs the tool to parse all Java files in the given d
 <h2 id="shell-script">Shell script</h2>
 <p>For frequent use, it is recommended to create a shell script or batch file that contains the necessary commands.
 <div class="language-shell highlight"><span class="filename">~/bin/profile</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="ch">#!/usr/bin/env bash</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>java<span class="w"> </span>-jar<span class="w"> </span>~/.local/lib/profiler-0.11.2.jar<span class="w"> </span><span class="nv">$@</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>java<span class="w"> </span>-jar<span class="w"> </span>~/.local/lib/profiler-0.12.0.jar<span class="w"> </span><span class="nv">$@</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># java -&gt; /usr/lib/jvm/java-21-openjdk/bin/java</span>
 </span></code></pre></div></p>
 <p>This script can then be placed in a directory that is included in the system's PATH variable.
@@ -847,24 +867,18 @@ This will parse, instrument and compile the given file, execute the program with
 <p>This will parse all <code>*.java</code> files in the sources directory and create an instrumented copy.
 The first positional parameter to the tool specifies the class containing the main entry point. 
 Its instrumented copy will be used to run the program.</p>
-<h2 id="profiler-tool-workflow">Profiler tool workflow</h2>
-<p>After parsing all files the <code>.profiler/metadata.dat</code> file will be created, containing information about
-every found code block like its begin/end position, its parent method/class and other relevant data to create a report.</p>
-<p>The tool will then automatically compile the instrumented version using the <code>javac</code> compiler.
-<div class="language-shell highlight"><span class="filename">(the tool executes this command internally)</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>javac<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>-d<span class="w"> </span>.profiler/classes<span class="w"> </span>Main.java
-</span></code></pre></div>
-(whereas <code>Main.java</code> is the specified main file)</p>
-<p>The Java compiler finds referenced Java files (used in Main) itself and compile them also
-into (instrumented) <code>.class</code> files. The compiled classes will be written to the <code>.profiler/classes/</code> directory.</p>
-<p>Next, the <code>java</code> binary is used to execute the specified class by name (without the <code>.java</code> extension)
-and with the given arguments:
-<div class="language-shell highlight"><span class="filename">(the tool executes this command internally)</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>java<span class="w"> </span>-cp<span class="w"> </span>.profiler/classes<span class="w"> </span>Main<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
-</span></code></pre></div>
-Executing the instrumented files, automatically stores the hit-counter values in <code>.profiler/counts.dat</code>
-as soon as the program execution is finished and the JVM shuts down.</p>
-<p>Finally, the metadata and counts will be used to create the report inside <code>.profiler/report/</code>.</p>
-<p>A link to the report will be created in the current working directory, pointing to <code>.profiler/report/index.html</code>.
-On Linux or macOS it will be a symbolic link, on Windows a <code>report.lnk</code> shortcut link.</p>
+<h3 id="run-modes-and-custom-compilation">Run modes and custom compilation</h3>
+<p>In case the project cannot be compiled with <code>javac Main.java</code>, the two additional run modes can be used:</p>
+<p><div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a>profile<span class="w"> </span>--instrument-only<span class="w"> </span>src
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="hll">javac<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>-customArg<span class="w"> </span>.profiler/instrumented/Main.java
+</span></span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="hll">java<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>Main
+</span></span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a>profile<span class="w"> </span>--generate-report
+</span></code></pre></div></td></tr></table></div>
+This way the <code>-customArg</code> can be passed to the <code>javac</code> command. 
+Instead of lines 2-3 any other custom command like <code>ant</code>/<code>gradlew</code>/.. can be substituted.</p>
 
 
 
@@ -911,13 +925,13 @@ On Linux or macOS it will be a symbolic link, on Windows a <code>report.lnk</cod
         
         
           
-          <a href="../fxui/" class="md-footer__link md-footer__link--next" aria-label="Next: JavaFX UI">
+          <a href="../workflow/" class="md-footer__link md-footer__link--next" aria-label="Next: Tool Workflow">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                JavaFX UI
+                Tool Workflow
               </div>
             </div>
             <div class="md-footer__button md-icon">

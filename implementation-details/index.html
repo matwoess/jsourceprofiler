@@ -765,7 +765,7 @@ We use this to add hooks for our <code>ParserState</code> helper class.</p>
 </span><span id="__span-0-5">    &quot;;&quot;                     (. state.setPackageName(packageName); .)
 </span><span id="__span-0-6">.
 </span></code></pre></div>
-<p>Which would result in the following generated parser (pseudo-code) method: 
+<p>Which would result in the following generated parser (pseudo-code) method: </p>
 <div class="language-java highlight"><span class="filename">Parser.java</span><pre><span></span><code><span id="__span-1-1"><span class="kt">void</span><span class="w"> </span><span class="nf">PackageDecl</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-1-2"><span class="w">    </span><span class="n">Expect</span><span class="p">(</span><span class="s">&quot;package&quot;</span><span class="p">);</span>
 </span><span id="__span-1-3"><span class="hll"><span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">packageName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"> </span>
@@ -779,12 +779,12 @@ We use this to add hooks for our <code>ParserState</code> helper class.</p>
 </span><span id="__span-1-11"><span class="w">    </span><span class="n">Expect</span><span class="p">(</span><span class="s">&quot;;&quot;</span><span class="p">);</span>
 </span><span id="__span-1-12"><span class="hll"><span class="w">    </span><span class="n">state</span><span class="p">.</span><span class="na">setPackageName</span><span class="p">(</span><span class="n">packageName</span><span class="p">);</span><span class="w"> </span>
 </span></span><span id="__span-1-13"><span class="p">}</span>
-</span></code></pre></div></p>
+</span></code></pre></div>
+<p>(where <code>t</code> is the current token, <code>la</code> the look-ahead token and <code>state</code> the <code>ParserState</code> instance)</p>
 <p>In this way our state class is automatically updated during the recursive-descent parsing of Java source files,
-and we can build our metadata on-the-go.</p>
+and we can build our metadata whenever we encounter a new relevant token.</p>
 <h2 id="instrumentation">Instrumentation</h2>
 <p>The tool parses source code files and stores an instrumented copy in the output directory.
-<br/>
 At the beginning of executable code blocks (usually after an opening brace <code>{</code>). a <code>__Counter.inc(X);</code> statement is
 inserted.</p>
 <p>A program like:
@@ -821,12 +821,13 @@ inserted.</p>
 </span><span id="__span-3-15"><span class="p">}</span>
 </span></code></pre></div></p>
 <p>Counter statements are always appended to the end of a line, to preserve the original line numbers.
-This is especially important for getting correct lines numbers when an exception is thrown.</p>
+This is especially important for getting correct lines numbers when an exception is thrown during execution 
+of the instrumented program.</p>
 <h2 id="the-__counter-class">The <code>__Counter</code> class</h2>
 <p>To successfully compile a copy of the program with additional <code>__Counter.inc(x)</code> statements,
 we need to import the <code>__Counter</code> class inside each instrumented file.
 The class is contained in a root-level <code>auxiliary</code> package so that can be imported at any level in the hierarchy.</p>
-<p>A compiled <code>.class</code> version of <code>__Counter</code> is extracted from the tool JAR and copied
+<p>A compiled <code>.class</code> version of <code>__Counter</code> is extracted from the tool's JAR and copied
 to the <code>instrumented/</code> and <code>classes/</code> output directories.</p>
 <p>The counter class stores an array the size of all (number of) all found blocks in the entire project.
 Every <code>__Counter.inc(idx)</code> statement includes the block index <code>idx</code> to increment.</p>

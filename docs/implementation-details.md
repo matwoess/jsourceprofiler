@@ -15,12 +15,46 @@ Using Coco's `ANY` keyword, we over-read non-relevant tokens like:
 - array initializer blocks (starting with `{`), but we do not insert counters here
 - a method’s argument list (within the parentheses)
 - remaining tokens in a `GenericStatement` up to the semicolon
-- the switch-case label(s), constant(s) and guard clause(s) before the colon or arrow
+- a switch's case label(s), constant(s) and guard clause(s) before the colon or arrow
 
 To build an index of classes and their methods, we have to keep track of class and method names 
 in each file and assign them to the block objects in the model.
+Package declarations at the beginning of a file have to be propagated to each class to determine fully qualified names.
 
-Package declarations at the beginning of a file will be propagated to each class to determine its fully qualified name.
+Therefore, we used the semantic action syntax of Coco/R to insert our custom statements into the final generated parser file.
+Arbitrary Java statements can be included in the ATG in the form of `(. STATEMENT; .)` blocks.
+We use this to add hooks for our `ParserState` helper class.
+
+E.g. to parse the full package name an NTS like this could be defined:
+
+``` { title="JavaFile.atg" }
+PackageDecl = "package"     (. ArrayList<String> packageName = new ArrayList<>(); .)
+    ident                   (. packageName.add(t.val); .)
+    {'.' ident              (. packageName.add(t.val); .)
+    }
+    ";"                     (. state.setPackageName(packageName); .)
+.
+```
+
+Which would result in the following generated parser (pseudo-code) method: 
+```java { title="Parser.java" hl_lines="3 5 9 12" }
+void PackageDecl() {
+    Expect("package");
+    ArrayList<String> packageName = new ArrayList<>(); 
+    Expect(IDENT);
+    packageName.add(t.val); 
+    while (la.kind == DOT) {
+        Get();
+        Expect(IDENT);
+        packageName.add(t.val); 
+    }
+    Expect(";");
+    state.setPackageName(packageName); 
+}
+```
+
+In this way our state class is automatically updated during the recursive-descent parsing of Java source files,
+and we can build our metadata on-the-go.
 
 ## Instrumentation
 The tool parses source code files and stores an instrumented copy in the output directory.
@@ -72,7 +106,7 @@ This is especially important for getting correct lines numbers when an exception
 
 To successfully compile a copy of the program with additional `__Counter.inc(x)` statements,
 we need to import the `__Counter` class inside each instrumented file.
-The class is contained in a root-level `auxiliary` package and can be imported at any level in the hierarchy.
+The class is contained in a root-level `auxiliary` package so that can be imported at any level in the hierarchy.
 
 A compiled `.class` version of `__Counter` is extracted from the tool JAR and copied
 to the `instrumented/` and `classes/` output directories.

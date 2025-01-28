@@ -24,7 +24,7 @@ The columns are clickable and allow re-sorting of the rows by an alternative met
 <br/>
 Clicking on the class name will open the "Methods" index for this class.
 <br/>
-By clicking on the source file link, we can jump directly to the source file detail view.
+By clicking on the source file link, we can jump directly to this file's detail view.
 
 ## Methods overview (index_ClassName.html)
 
@@ -46,7 +46,7 @@ Browser-back or the button on top of the file can be used to return to the class
 ## Source file detail view (JavaFileName.html)
 
 For each Java file, an annotated source code file is generated inside `.profiler/report/source/`.
-It can be used to explore the methods and statements of each class and in detail and get coverage information.
+It can be used to explore the methods and statements of each class in detail and get coverage information.
 
 A small [jQuery](https://jquery.com/) script [file](https://github.com/matwoess/jsourceprofiler/tree/main/jsourceprofiler-tool/src/main/resources/js/highlighter.js) initializes
 colors for relevant sections and dynamically updates them on mouse hover.
@@ -62,12 +62,12 @@ Never-covered blocks are displayed with a <span style="color: indianred">red</sp
 Statements with the same hit count are grouped into "code regions".
 These regions are shown in a darker, more opaque green and red (depending on their coverage status).
 
-The column, to the left of the line numbers, contains the region's hit counts for each line.
+The column, to the right of the line numbers, contains the region's hit counts for each line.
 <br/>
-If multiple code regions start in the same line, the hits are shown stacked next to each other.
+If **multiple** code regions start in the **same** line, the hits are shown stacked next to each other.
 
 Hovering over a block or region will highlight the entire block in
 <span style="color: gold">yellow</span> and statements of the current region in
 <span style="color: orange">orange</span>.
-The current region's code will also become bold until moving the mouse away from it.
+The current region's code will also become **bold** until moving the mouse away from it.
 Additionally, a popup will show the number of hits from the current block or region.

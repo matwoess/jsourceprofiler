@@ -16,10 +16,10 @@ It is created automatically if it does not exist.
 For being able to use local project resources and relative paths (as arguments or inside the program itself)
 the tool never changes its working directory during execution. Instead, the classpath is set to the instrumented copies
 inside the `.profiler` directory.
-It is therefore recommended to run the command line tool in the project's root directory.
+It is therefore recommended to run the command line tool in the project's root directory
+(just like you would for using `java` and `javac`).
 
 In the simplest case the tool can be invoked with a single Main file as its target.
-<br/>
 If the program-to-profile consists of multiple class source files the `--sources-directory` (`-d`) parameter is **required**!
 Setting this parameter instructs the tool to parse all Java files in the given directory and its subdirectories.
 
@@ -43,10 +43,13 @@ There are a few optional arguments available. For a full list, see the `-h` or `
 ### `--sources-directory`
 If the project-to-profile consists of two or more (linked) Java files, the sources directory has to be specified.
 This is done with the `-d` or `--sources-directory` option:
+
 ```shell
 profile -d src/main/java/ src/main/java/subfolder/Main.java
 ```
 
+This is necessary, because we cannot know all dependent and referenced source files at the source code instrumentation 
+stage without help from the Java compiler.
 Using this option, all `.java` files inside `src/main/java/` will be parsed, instrumented and copied to the
 `.profiler/instrumented` directory. The relative folder-structure is replicated to ensure successful compilation 
 (`javac` will throw an error if the package name and file paths mismatch).
@@ -80,16 +83,17 @@ The instrumented code can then be compiled by *custom* commands and run manually
 If a project was already instrumented and run, the HTML report can be quickly (re-)generated
 with the `-r` or `--generate-report` run mode.
 In this mode, no parsing or instrumentation will be done.
-For it to succeed the `metadata.dat` and `counts.dat` files must already exist in the `.profiler` output directory.
+For it to succeed both the `metadata.dat` and `counts.dat` files must already exist in the `.profiler` output directory.
+Otherwise, the tool will abort with an error message.
 
 
 ## Sample usage
 
 ### Single file projects
 
-If the entire program-to-profile is contained in a *single* Java source file, the tool can be used as following:
+If the entire program-to-profile is contained in a *single* Java source file `App.java`, the tool can be used as following:
 ```shell
-profile Main.java arg1 arg2 ...
+profile App.java arg1 arg2 ...
 ```
 This will parse, instrument and compile the given file, execute the program with the given arguments, and create a report.
 
@@ -98,20 +102,20 @@ This will parse, instrument and compile the given file, execute the program with
 If the program consists of multiple Java files, the sources directory has to be specified:
 
 ```shell
-profile -d src/ src/Main.java arg1 arg2 ...
+profile -d src/ src/App.java arg1 arg2 ...
 ```
 
 This will parse all `*.java` files in the sources directory and create an instrumented copy.
-The first positional parameter to the tool specifies the class containing the main entry point. 
+The first *positional* parameter to the tool specifies the class containing the main entry point. 
 Its instrumented copy will be used to run the program.
 
 ### Run modes and custom compilation
-In case the project cannot be compiled with `javac Main.java`, the two additional run modes can be used:
+In case the project cannot be compiled with `javac App.java`, the two additional run modes can be used:
 
 ```shell { hl_lines="2 3" linenums="1" }
-profile --instrument-only src
-javac -cp .profiler/instrumented -customArg .profiler/instrumented/Main.java
-java -cp .profiler/instrumented Main
+profile --instrument-only src/
+javac -cp .profiler/instrumented -customArg .profiler/instrumented/App.java
+java -cp .profiler/instrumented App
 profile --generate-report
 ```
 This way the `-customArg` can be passed to the `javac` command. 

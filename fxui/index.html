@@ -599,34 +599,32 @@ It features an optional JavaFX tool-runner GUI.
 
 <h1 id="javafx-ui">JavaFX UI</h1>
 <p>An easy-to-use graphical application was created (using the <a href="https://openjfx.io/">JavaFX</a> toolkit), to configure parameters and arguments
-for the command-line tool. It automatically calls the tool in a new terminal window.</p>
+for the command-line tool. It automatically calls the profiler in a new terminal window with the specified options.</p>
 <p>Golden <span style="color: darkgoldenrod;">(?)</span> labels can be hovered over for more information about each field.</p>
 <h2 id="open-project-dialog">Open project dialog</h2>
 <p>Before displaying the main application view, a project directory must be chosen, using the initial selection dialog.</p>
 <p><img alt="FxUI project selection dialog" src="../screenshots/fxui-project-selection-dialog.png" /></p>
 <p>Clicking <kbd>Select</kbd> will open the system's native file-picker dialog to choose a folder.
-<br/>
 Alternatively, the path can be entered directly into the text field.</p>
 <p>As soon as a valid folder path is entered, the main application window can be invoked with the <kbd>Open</kbd> button.</p>
-<p>The opened path will be stored locally and pre-filled on the next program execution.</p>
+<p>The entered path will be stored in a local file and pre-filled on the next program execution.</p>
 <h2 id="main-application-window">Main application window</h2>
 <p><img alt="FxUI main window" src="../screenshots/fxui-main-application-window.png" /></p>
 <p>Using the file tree on the left, the sources directory and main file can be selected. Depending on the run mode
-this may be required.
-<br/>
-Assigning a file or directory to a parameter can be done with the <kbd>Return</kbd> key, or using the context menu
-on a tree item.</p>
-<p>The tree highlights important items in color:</p>
+this may be required.</p>
+<p>Assigning a file or directory to a parameter field can be done by the <kbd>Return</kbd> key, or using the context menu
+on a any item in the tree.</p>
+<p>The tree view highlights important items in color:</p>
 <ul>
-<li><span style="color: royalblue;">blue</span> for the selected sources directory,</li>
-<li><span style="color: green;">green</span> for selected main file.</li>
-<li><span style="color: brown;">brown</span> for the tool's (hidden) output directory</li>
+<li><span style="color: royalblue;">blue</span> for the selected sources directory</li>
+<li><span style="color: green;">green</span> for the selected main file</li>
+<li><span style="color: brown;">brown</span> for the (hidden) output directory <code>.profiler</code></li>
 </ul>
 <p>The top menu bar allows rebuilding the file tree and saving or restoring currently set parameters (will be saved in the
 output directory as <code>parameters.dat</code>).</p>
 <p>When clicking <kbd>Run tool</kbd>, a system-native terminal will be launched, showing the program output and
 allowing user input (useful for interactive programs).
-The terminal application to use can be customized in the user interface.</p>
+The terminal application to use can be selected in the user interface.</p>
 <p>The effectively executed terminal command can be previewed with the <kbd>Preview command</kbd> button.</p>
 <p><kbd>Open report</kbd> will only show up once the <code>.profiler/report/index.html</code> file exists.
 Clicking it opens the report in the system's default application for HTML files (usually a browser).</p>

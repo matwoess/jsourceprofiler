@@ -616,21 +616,21 @@ It features an optional JavaFX tool-runner GUI.
 
 
 <h1 id="tool-workflow">Tool Workflow</h1>
-<p>This section further describes the inner workings of the <strong>jsourceprofiler</strong> tool in more detail.</p>
-<p>The workflow of the profiler is divided into the following stages:</p>
+<p>This section further describes the inner workings of <strong>jsourceprofiler</strong> in more detail.</p>
+<p>The workflow of the profiler is divided into the five stages:</p>
 <p><img alt="The five main steps of the profiler" src="../screenshots/profiler-steps.png" /></p>
 <h2 id="analyze-and-instrument">Analyze and Instrument</h2>
-<p>After parsing all Java sources, the <code>.profiler/metadata.dat</code> file will be created.</p>
-<p>It contains information about every found code block like:</p>
+<p>After parsing all Java sources, the <code>.profiler/metadata.dat</code> file will be created.
+It contains information about every found code block, used for instrumentation and creation of the report. </p>
+<p>Some example data are:</p>
 <ul>
-<li>its unique ID</li>
-<li>the begin/end position and line number</li>
+<li>the unique ID of a block (index in order of found)</li>
+<li>the start/end position and line number</li>
 <li>a pointer to the outer block (if any)</li>
-<li>its parent method/class/package</li>
-<li>its type (method, if, for, while, ...) to know how to instrument it</li>
-<li>other relevant data for creating the report</li>
+<li>the block's parent method/class/package</li>
+<li>its type (method, if, for, switch, ...)</li>
 </ul>
-<p>All instrumented source file copies will be written to the <code>.profiler/instrumented/</code> directory.</p>
+<p>All instrumented source file copies are written to <code>.profiler/instrumented/</code>.</p>
 <h2 id="compile">Compile</h2>
 <p>The tool will then automatically compile the instrumented version using the <code>javac</code> compiler.
 <div class="language-shell highlight"><span class="filename">(the tool executes this command internally)</span><pre><span></span><code><span id="__span-0-1">javac<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>-d<span class="w"> </span>.profiler/classes<span class="w"> </span>App.java
@@ -638,21 +638,32 @@ It features an optional JavaFX tool-runner GUI.
 (whereas <code>App.java</code> is the specified main file)</p>
 <p>The Java compiler finds referenced Java files (used in <code>App</code>) automatically and compiles them next
 into (instrumented) <code>.class</code> files. The compiled classes will be written to the <code>.profiler/classes/</code> directory.</p>
-<p>Inserted counter use the <code>auxiliary.__Counter</code> class to increment the hit-counters. For the instrumented code to compile,
-the pre-compiled <code>auxiliary</code> package is extracted and copied to the <code>.profiler/instrumented/</code> by the tool.</p>
-<p>Classes that are <strong>not</strong> used in the main file or its linked classes will <strong>not</strong> be compiled.</p>
+<p>Inserted counters use the <code>auxiliary.__Counter</code> class to increment the hit-counters. For the instrumented code to compile,
+the pre-built <code>auxiliary</code> package is extracted and copied to <code>.profiler/instrumented/</code> by the profiler.</p>
+<p>Classes that are <strong>not</strong> used in the main file or its referenced classes will <strong>not</strong> be compiled.</p>
 <h2 id="execute">Execute</h2>
-<p>Next, the <code>java</code> binary is used to execute the specified class by name (without the <code>.java</code> extension)
+<p>Next, the <code>java</code> binary is used to execute the instrumented copy of the specified class by name (without the <code>.java</code> extension)
 and with the given arguments:
 <div class="language-shell highlight"><span class="filename">(the tool executes this command internally)</span><pre><span></span><code><span id="__span-1-1">java<span class="w"> </span>-cp<span class="w"> </span>.profiler/classes<span class="w"> </span>App<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
 </span></code></pre></div></p>
-<p>Again, for this to work the <code>auxiliary</code> package is copied to the <code>.profiler/classes/</code> directory.</p>
+<p>Again, for this to work, the <code>auxiliary</code> package is copied to the <code>.profiler/classes/</code> directory.</p>
 <p>Executing the instrumented files, automatically stores the hit-counter values in <code>.profiler/counts.dat</code>
-as soon as the program execution is finished and the JVM shuts down.</p>
+as soon as the program execution is finished and the JVM shuts down.
+This is done by a shutdown hook in the <code>__Counter</code> class and a hard-coded path.</p>
+<div class="language-java highlight"><span class="filename">auxiliary.__Counter.java</span><pre><span></span><code><span id="__span-2-1"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">__Counter</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-2"><span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-3"><span class="w">    </span><span class="n">init</span><span class="p">(</span><span class="s">&quot;.profiler/metadata.dat&quot;</span><span class="p">);</span>
+</span><span id="__span-2-4"><span class="w">    </span><span class="n">Runtime</span><span class="p">.</span><span class="na">getRuntime</span><span class="p">().</span><span class="na">addShutdownHook</span><span class="p">(</span>
+</span><span id="__span-2-5"><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">save</span><span class="p">((</span><span class="s">&quot;.profiler/counts.dat&quot;</span><span class="p">))));</span>
+</span><span id="__span-2-6"><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-2-7"><span class="w">  </span><span class="p">...</span>
+</span><span id="__span-2-8"><span class="p">}</span>
+</span></code></pre></div>
 <h2 id="report">Report</h2>
-<p>Finally, the metadata and counts will be used to create the report inside <code>.profiler/report/</code>.</p>
-<p>A link to the report will be created in the current working directory, pointing to <code>.profiler/report/index.html</code>.
-On Linux or macOS it will be a symbolic link, on Windows a <code>report.lnk</code> shortcut link.</p>
+<p>Finally, the metadata and counts will be used to generate the report inside <code>.profiler/report/</code>.</p>
+<p>Afterward, a <code>report.html</code> link to the report will be created in the current working directory, pointing to <code>.profiler/report/index.html</code>.
+On Linux or macOS it will be a symbolic link, on Windows a <code>report.lnk</code> shortcut file.</p>
+<p>The HTML report can then be used to find hotspots during the last execution (further described in the <a href="../report/">Report</a> section).</p>
 
 
 

@@ -808,9 +808,9 @@ It is created automatically if it does not exist.</p>
 <p>For being able to use local project resources and relative paths (as arguments or inside the program itself)
 the tool never changes its working directory during execution. Instead, the classpath is set to the instrumented copies
 inside the <code>.profiler</code> directory.
-It is therefore recommended to run the command line tool in the project's root directory.</p>
+It is therefore recommended to run the command line tool in the project's root directory
+(just like you would for using <code>java</code> and <code>javac</code>).</p>
 <p>In the simplest case the tool can be invoked with a single Main file as its target.
-<br/>
 If the program-to-profile consists of multiple class source files the <code>--sources-directory</code> (<code>-d</code>) parameter is <strong>required</strong>!
 Setting this parameter instructs the tool to parse all Java files in the given directory and its subdirectories.</p>
 <h2 id="shell-script">Shell script</h2>
@@ -826,10 +826,12 @@ It allows the tool to be called from any location in the terminal by its file na
 <p>There are a few optional arguments available. For a full list, see the <code>-h</code> or <code>--help</code> arguments.</p>
 <h3 id="-sources-directory"><code>--sources-directory</code></h3>
 <p>If the project-to-profile consists of two or more (linked) Java files, the sources directory has to be specified.
-This is done with the <code>-d</code> or <code>--sources-directory</code> option:
+This is done with the <code>-d</code> or <code>--sources-directory</code> option:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1">profile<span class="w"> </span>-d<span class="w"> </span>src/main/java/<span class="w"> </span>src/main/java/subfolder/Main.java
-</span></code></pre></div></p>
-<p>Using this option, all <code>.java</code> files inside <code>src/main/java/</code> will be parsed, instrumented and copied to the
+</span></code></pre></div>
+<p>This is necessary, because we cannot know all dependent and referenced source files at the source code instrumentation 
+stage without help from the Java compiler.
+Using this option, all <code>.java</code> files inside <code>src/main/java/</code> will be parsed, instrumented and copied to the
 <code>.profiler/instrumented</code> directory. The relative folder-structure is replicated to ensure successful compilation 
 (<code>javac</code> will throw an error if the package name and file paths mismatch).</p>
 <h3 id="-synchronized"><code>--synchronized</code></h3>
@@ -853,28 +855,29 @@ The instrumented code can then be compiled by <em>custom</em> commands and run m
 <p>If a project was already instrumented and run, the HTML report can be quickly (re-)generated
 with the <code>-r</code> or <code>--generate-report</code> run mode.
 In this mode, no parsing or instrumentation will be done.
-For it to succeed the <code>metadata.dat</code> and <code>counts.dat</code> files must already exist in the <code>.profiler</code> output directory.</p>
+For it to succeed both the <code>metadata.dat</code> and <code>counts.dat</code> files must already exist in the <code>.profiler</code> output directory.
+Otherwise, the tool will abort with an error message.</p>
 <h2 id="sample-usage">Sample usage</h2>
 <h3 id="single-file-projects">Single file projects</h3>
-<p>If the entire program-to-profile is contained in a <em>single</em> Java source file, the tool can be used as following:
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1">profile<span class="w"> </span>Main.java<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
+<p>If the entire program-to-profile is contained in a <em>single</em> Java source file <code>App.java</code>, the tool can be used as following:
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1">profile<span class="w"> </span>App.java<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
 </span></code></pre></div>
 This will parse, instrument and compile the given file, execute the program with the given arguments, and create a report.</p>
 <h3 id="multi-file-projects">Multi-file projects</h3>
 <p>If the program consists of multiple Java files, the sources directory has to be specified:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1">profile<span class="w"> </span>-d<span class="w"> </span>src/<span class="w"> </span>src/Main.java<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1">profile<span class="w"> </span>-d<span class="w"> </span>src/<span class="w"> </span>src/App.java<span class="w"> </span>arg1<span class="w"> </span>arg2<span class="w"> </span>...
 </span></code></pre></div>
 <p>This will parse all <code>*.java</code> files in the sources directory and create an instrumented copy.
-The first positional parameter to the tool specifies the class containing the main entry point. 
+The first <em>positional</em> parameter to the tool specifies the class containing the main entry point. 
 Its instrumented copy will be used to run the program.</p>
 <h3 id="run-modes-and-custom-compilation">Run modes and custom compilation</h3>
-<p>In case the project cannot be compiled with <code>javac Main.java</code>, the two additional run modes can be used:</p>
+<p>In case the project cannot be compiled with <code>javac App.java</code>, the two additional run modes can be used:</p>
 <p><div class="language-shell highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1">profile<span class="w"> </span>--instrument-only<span class="w"> </span>src
-</span><span id="__span-5-2"><span class="hll">javac<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>-customArg<span class="w"> </span>.profiler/instrumented/Main.java
-</span></span><span id="__span-5-3"><span class="hll">java<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>Main
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1">profile<span class="w"> </span>--instrument-only<span class="w"> </span>src/
+</span><span id="__span-5-2"><span class="hll">javac<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>-customArg<span class="w"> </span>.profiler/instrumented/App.java
+</span></span><span id="__span-5-3"><span class="hll">java<span class="w"> </span>-cp<span class="w"> </span>.profiler/instrumented<span class="w"> </span>App
 </span></span><span id="__span-5-4">profile<span class="w"> </span>--generate-report
 </span></code></pre></div></td></tr></table></div>
 This way the <code>-customArg</code> can be passed to the <code>javac</code> command. 

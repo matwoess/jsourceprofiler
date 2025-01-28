@@ -616,7 +616,7 @@ At the bottom of the list we find rarely or never used classes.</p>
 <br/>
 Clicking on the class name will open the "Methods" index for this class.
 <br/>
-By clicking on the source file link, we can jump directly to the source file detail view.</p>
+By clicking on the source file link, we can jump directly to this file's detail view.</p>
 <h2 id="methods-overview-index_classnamehtml">Methods overview (index_ClassName.html)</h2>
 <p>A separate method index is created for each <em>top-level</em> class.
 <br/>
@@ -629,7 +629,7 @@ Anonymous and local classes get a numbered name <code>Outer$3::Method</code>, ju
 <p>Browser-back or the button on top of the file can be used to return to the class overview page.</p>
 <h2 id="source-file-detail-view-javafilenamehtml">Source file detail view (JavaFileName.html)</h2>
 <p>For each Java file, an annotated source code file is generated inside <code>.profiler/report/source/</code>.
-It can be used to explore the methods and statements of each class and in detail and get coverage information.</p>
+It can be used to explore the methods and statements of each class in detail and get coverage information.</p>
 <p>A small <a href="https://jquery.com/">jQuery</a> script <a href="https://github.com/matwoess/jsourceprofiler/tree/main/jsourceprofiler-tool/src/main/resources/js/highlighter.js">file</a> initializes
 colors for relevant sections and dynamically updates them on mouse hover.
 Syntax highlighting is provided by <a href="https://highlightjs.org/">highlight.js</a>. 
@@ -640,13 +640,13 @@ are highlighted in <span style="color: lightgreen">green</span>.
 Never-covered blocks are displayed with a <span style="color: indianred">red</span> background color.</p>
 <p>Statements with the same hit count are grouped into "code regions".
 These regions are shown in a darker, more opaque green and red (depending on their coverage status).</p>
-<p>The column, to the left of the line numbers, contains the region's hit counts for each line.
+<p>The column, to the right of the line numbers, contains the region's hit counts for each line.
 <br/>
-If multiple code regions start in the same line, the hits are shown stacked next to each other.</p>
+If <strong>multiple</strong> code regions start in the <strong>same</strong> line, the hits are shown stacked next to each other.</p>
 <p>Hovering over a block or region will highlight the entire block in
 <span style="color: gold">yellow</span> and statements of the current region in
 <span style="color: orange">orange</span>.
-The current region's code will also become bold until moving the mouse away from it.
+The current region's code will also become <strong>bold</strong> until moving the mouse away from it.
 Additionally, a popup will show the number of hits from the current block or region.</p>
 
 

@@ -37,6 +37,7 @@ PackageDecl = "package"     (. ArrayList<String> packageName = new ArrayList<>()
 ```
 
 Which would result in the following generated parser (pseudo-code) method: 
+
 ```java { title="Parser.java" hl_lines="3 5 9 12" }
 void PackageDecl() {
     Expect("package");
@@ -53,12 +54,13 @@ void PackageDecl() {
 }
 ```
 
+(where `t` is the current token, `la` the look-ahead token and `state` the `ParserState` instance)
+
 In this way our state class is automatically updated during the recursive-descent parsing of Java source files,
-and we can build our metadata on-the-go.
+and we can build our metadata whenever we encounter a new relevant token.
 
 ## Instrumentation
 The tool parses source code files and stores an instrumented copy in the output directory.
-<br/>
 At the beginning of executable code blocks (usually after an opening brace `{`). a `__Counter.inc(X);` statement is
 inserted.
 
@@ -100,7 +102,8 @@ class Fibonacci {
 ```
 
 Counter statements are always appended to the end of a line, to preserve the original line numbers.
-This is especially important for getting correct lines numbers when an exception is thrown.
+This is especially important for getting correct lines numbers when an exception is thrown during execution 
+of the instrumented program.
 
 ## The `__Counter` class
 
@@ -108,7 +111,7 @@ To successfully compile a copy of the program with additional `__Counter.inc(x)`
 we need to import the `__Counter` class inside each instrumented file.
 The class is contained in a root-level `auxiliary` package so that can be imported at any level in the hierarchy.
 
-A compiled `.class` version of `__Counter` is extracted from the tool JAR and copied
+A compiled `.class` version of `__Counter` is extracted from the tool's JAR and copied
 to the `instrumented/` and `classes/` output directories.
 
 The counter class stores an array the size of all (number of) all found blocks in the entire project.

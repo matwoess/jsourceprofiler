@@ -42,7 +42,9 @@ bin/
 .DS_Store
 
 ### Custom ###
-/src/main/java/tool/instrument/Parser.java
-/src/main/java/tool/instrument/Parser.java.old
-/src/main/java/tool/instrument/Scanner.java
-/src/main/java/tool/instrument/Scanner.java.old
+/src/main/java/org/matwoess/jsourceprofiler/tool/instrument/Parser.java
+/src/main/java/org/matwoess/jsourceprofiler/tool/instrument/Parser.java.old
+/src/main/java/org/matwoess/jsourceprofiler/tool/instrument/Scanner.java
+/src/main/java/org/matwoess/jsourceprofiler/tool/instrument/Scanner.java.old
+/report.html
+/report.html.lnk

@@ -14,22 +14,32 @@ For an introduction to the JavaFX tool-runner GUI, see the [JavaFX UI](fxui.md) 
 ## Building from source
 To build the project from source, Gradle and a Java JDK of version 21 or newer are required.
 
+After that it's as simple as:
+```shell
+./gradlew build
+```
+
 After cloning or downloading the source code, the `Scanner.java` and `Parser.java` files must first
 be generated using the [Coco/R library](https://ssw.jku.at/Research/Projects/Coco/Java/Coco.jar).
-This can be done by running the provided `generate-parser.sh`  bash script,
-or the `generate-parser.ps1` PowerShell script in the
-[scripts/](https://github.com/matwoess/jsourceprofiler/tree/main/scripts) folder.
-Both will automatically download Coco/R to the `lib/` folder and use it to create the needed files using the project's
-[ATG file](https://github.com/matwoess/jsourceprofiler/tree/main/jsourceprofiler-tool/src/main/java/org/matwoess/jsourceprofiler/tool/instrument/JavaFile.atg) (together with the `Scanner.frame` and `Parser.frame` files).
+This should be done automatically by our custom `generateParser` Gradle build step.
+It will download Coco/R to the `lib/` folder and use it to create the needed files using the project's
+[ATG file](https://github.com/matwoess/jsourceprofiler/tree/main/jsourceprofiler-tool/src/main/parsergen/JavaFile.atg) 
+(together with the `Scanner.frame` and `Parser.frame` files). 
+The task is added as a dependency to the `compileJava` task and will be called by Gradle when building the project.
 
-This step can also be done by downloading Coco/R manually and executing the following command in the
+This step could also be done by downloading Coco/R manually and executing the following command in the
 project's root directory, to (re-)generate the parser files at any time:
 
 ```shell
-java -jar lib/Coco.jar \
+java -jar jsourceprofiler-tool/lib/Coco.jar \
+  -o jsourceprofiler-tool/src/main/java/org/matwoess/jsourceprofiler/tool/instrument \
   -package org.matwoess.jsourceprofiler.tool.instrument \
-  jsourceprofiler-tool/src/main/java/org/matwoess/jsourceprofiler/tool/instrument/JavaFile.atg 
+  jsourceprofiler-tool/src/main/parsergen/JavaFile.atg 
 ```
+
+To create a single "fat" JAR that contains both `jsourceprofiler-tool` and `jsourceprofiler-common` in one archive
+(for easier use with the command-line) a `fatJar` build target is provided.
+This task is currently used to make the `profiler-x.y.z.jar` artifacts for the [Releases](https://github.com/matwoess/jsourceprofiler/releases/) section.
 
 ## Include as a dependency
 

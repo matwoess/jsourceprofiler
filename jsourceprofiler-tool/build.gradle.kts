@@ -101,6 +101,12 @@ tasks.compileJava {
 tasks.clean {
     delete(generatedScanner, generatedParser, generatedScannerOld, generatedParserOld)
 }
+// Explicitly declare that sourcesJar should pack output of generateParser into the JAR
+tasks.register<Jar>("sourcesJar") {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allJava)
+    dependsOn(generateParser)  // Add dependency
+}
 
 publishing {
     repositories {

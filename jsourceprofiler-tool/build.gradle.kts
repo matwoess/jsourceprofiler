@@ -58,7 +58,7 @@ tasks {
 val cocoUrl = "https://ssw.jku.at/Research/Projects/Coco/Java/Coco.jar"
 val libsDir = layout.projectDirectory.dir("lib")
 val cocoJar = libsDir.file("Coco.jar")
-val grammarFile = layout.projectDirectory.file("src/main/coco/JavaFile.atg")
+val grammarFile = layout.projectDirectory.file("src/main/parsergen/JavaFile.atg")
 val generatedSourcesDir = layout.projectDirectory.dir("src/main/java/org/matwoess/jsourceprofiler/tool/instrument")
 val generatedScanner = generatedSourcesDir.file("Scanner.java")
 val generatedParser = generatedSourcesDir.file("Parser.java")
@@ -82,7 +82,7 @@ val generateParser by tasks.registering(JavaExec::class) {
     group = "build"
     description = "Generates the Scanner.java and Parser.java files."
     dependsOn(downloadCoco)
-    inputs.files(fileTree("src/main/coco"))
+    inputs.files(fileTree("src/main/parsergen"))
     outputs.files(generatedScanner, generatedParser)
 
     classpath = files(cocoJar)

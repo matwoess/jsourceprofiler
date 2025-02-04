@@ -2,7 +2,7 @@ import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
     java
-    id("com.vanniktech.maven.publish") version "0.30.0"
+    id("com.vanniktech.maven.publish")
 }
 
 group = property("group") ?: ""

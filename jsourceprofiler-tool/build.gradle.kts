@@ -2,7 +2,7 @@ import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
     java
-    id("com.vanniktech.maven.publish") version "0.30.0"
+    id("com.vanniktech.maven.publish")
     id("de.undercouch.download") version "5.6.0"
 }
 
@@ -52,6 +52,7 @@ tasks {
             .map { if (it.isDirectory) it else zipTree(it) })
         val sourcesMain = sourceSets.main.get()
         from(sourcesMain.output)
+        dependsOn(generateParser)
     }
 }
 

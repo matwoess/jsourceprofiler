@@ -72,6 +72,7 @@ val downloadCoco by tasks.registering(de.undercouch.gradle.tasks.download.Downlo
     dest(cocoJar)
     overwrite(false)
     onlyIfModified(true)
+    acceptAnyCertificate(true)
     onlyIf { !cocoJar.asFile.exists() } // only attempt if library does not exist
     doFirst {
         libsDir.asFile.mkdirs() // Create lib directory if needed

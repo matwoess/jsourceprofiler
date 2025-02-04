@@ -11,6 +11,7 @@
 - [Gradle](https://gradle.org/)
 - [JavaFX](https://openjfx.io/)
 - [AtlantaFX](https://github.com/mkpaz/atlantafx) (Theme)
+- [gradle-download-task](https://github.com/michel-kraemer/gradle-download-task) (to download Coco/R automatically)
 
 ## Testing
 - [JUnit 5](https://junit.org/junit5/)

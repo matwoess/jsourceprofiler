@@ -19,15 +19,17 @@ After that it's as simple as:
 ./gradlew build
 ```
 
+### Generating the parser (automatic task)
+
 After cloning or downloading the source code, the `Scanner.java` and `Parser.java` files must first
 be generated using the [Coco/R library](https://ssw.jku.at/Research/Projects/Coco/Java/Coco.jar).
 This should be done automatically by our custom `generateParser` Gradle build step.
 It will download Coco/R to the `lib/` folder and use it to create the needed files using the project's
 [ATG file](https://github.com/matwoess/jsourceprofiler/tree/main/jsourceprofiler-tool/src/main/parsergen/JavaFile.atg) 
-(together with the `Scanner.frame` and `Parser.frame` files). 
-The task is added as a dependency to the `compileJava` task and will be called by Gradle when building the project.
+(together with the `Scanner.frame` and `Parser.frame` files). The task is added as a dependency to the `compileJava` 
+and `sourcesJar` tasks and will be called by Gradle when building the project.
 
-This step could also be done by downloading Coco/R manually and executing the following command in the
+This step could also be done manually by downloading Coco/R and executing the following command in the
 project's root directory, to (re-)generate the parser files at any time:
 
 ```shell
@@ -36,6 +38,8 @@ java -jar jsourceprofiler-tool/lib/Coco.jar \
   -package org.matwoess.jsourceprofiler.tool.instrument \
   jsourceprofiler-tool/src/main/parsergen/JavaFile.atg 
 ```
+
+### Additional build targets
 
 To create a single "fat" JAR that contains both `jsourceprofiler-tool` and `jsourceprofiler-common` in one archive
 (for easier use with the command-line) a `fatJar` build target is provided.

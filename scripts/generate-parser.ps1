@@ -6,5 +6,6 @@ if (-Not (Test-Path ".\lib\Coco.jar")) {
     Invoke-WebRequest -Uri $cocoJarUrl -OutFile ".\lib\Coco.jar"
 }
 java -jar lib/Coco.jar `
+    -o jsourceprofiler-tool/src/main/java/org/matwoess/jsourceprofiler/tool/instrument `
     -package org.matwoess.jsourceprofiler.tool.instrument `
-    jsourceprofiler-tool/src/main/java/org/matwoess/jsourceprofiler/tool/instrument/JavaFile.atg
+    jsourceprofiler-tool/src/main/coco/JavaFile.atg

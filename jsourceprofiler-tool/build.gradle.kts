@@ -3,6 +3,7 @@ import com.vanniktech.maven.publish.SonatypeHost
 plugins {
     java
     id("com.vanniktech.maven.publish") version "0.30.0"
+    id("de.undercouch.download") version "5.6.0"
 }
 
 group = property("group") ?: ""
@@ -38,17 +39,67 @@ val mainClass = "org.matwoess.jsourceprofiler.tool.cli.Main"
 
 tasks {
     register("fatJar", Jar::class.java) {
+        group = "build"
+        description = "Creates a single JAR file containing all dependencies (like the 'common' module)."
         archiveBaseName.set("profiler")
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         manifest {
             attributes["Main-Class"] = mainClass
         }
-        from(configurations.runtimeClasspath.get()
+        from(
+            configurations.runtimeClasspath.get()
             .onEach { println("add from dependencies: ${it.name}") }
             .map { if (it.isDirectory) it else zipTree(it) })
         val sourcesMain = sourceSets.main.get()
         from(sourcesMain.output)
     }
+}
+
+val cocoUrl = "https://ssw.jku.at/Research/Projects/Coco/Java/Coco.jar"
+val libsDir = layout.projectDirectory.dir("lib")
+val cocoJar = libsDir.file("Coco.jar")
+val grammarFile = layout.projectDirectory.file("src/main/coco/JavaFile.atg")
+val generatedSourcesDir = layout.projectDirectory.dir("src/main/java/org/matwoess/jsourceprofiler/tool/instrument")
+val generatedScanner = generatedSourcesDir.file("Scanner.java")
+val generatedParser = generatedSourcesDir.file("Parser.java")
+val generatedScannerOld = generatedSourcesDir.file("Scanner.java.old")
+val generatedParserOld = generatedSourcesDir.file("Parser.java.old")
+
+// Task to download Coco
+val downloadCoco by tasks.registering(de.undercouch.gradle.tasks.download.Download::class) {
+    description = "Downloads the Coco/R JAR library."
+    src(cocoUrl)
+    dest(cocoJar)
+    overwrite(false)
+    onlyIfModified(true)
+    onlyIf { !cocoJar.asFile.exists() } // only attempt if library does not exist
+    doFirst {
+        libsDir.asFile.mkdirs() // Create lib directory if needed
+    }
+}
+// Task to generate parser/scanner
+val generateParser by tasks.registering(JavaExec::class) {
+    group = "build"
+    description = "Generates the Scanner.java and Parser.java files."
+    dependsOn(downloadCoco)
+    inputs.files(fileTree("src/main/coco"))
+    outputs.files(generatedScanner, generatedParser)
+
+    classpath = files(cocoJar)
+    mainClass.set("Coco.Coco") // Main class in Coco.jar
+    args = listOf(
+        "-o", generatedSourcesDir.asFile.absolutePath,
+        "-package", "org.matwoess.jsourceprofiler.tool.instrument",
+        grammarFile.asFile.absolutePath
+    )
+}
+// Make compilation depend on generation
+tasks.compileJava {
+    dependsOn(generateParser)
+}
+// Clean generated files
+tasks.clean {
+    delete(generatedScanner, generatedParser, generatedScannerOld, generatedParserOld)
 }
 
 publishing {

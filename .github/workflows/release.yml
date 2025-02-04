@@ -18,11 +18,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: "Generate scanner and parser files"
-        shell: bash
-        run: |
-          ./scripts/generate-parser.sh
-
       - name: "Extract project version from Gradle properties"
         run: |
           echo "COMMON_VERSION=$(grep -Po 'commonVersion=\K.*' gradle.properties)" >> $GITHUB_ENV

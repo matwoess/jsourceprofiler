@@ -29,11 +29,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: "Generate scanner and parser files"
-        shell: bash
-        run: |
-          ./scripts/generate-parser.sh
-
       - name: "Setup Gradle"
         uses: gradle/actions/setup-gradle@v3
         with:

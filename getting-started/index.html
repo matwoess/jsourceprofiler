@@ -350,6 +350,30 @@ It features an optional JavaFX tool-runner GUI.
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Building from source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generating-the-parser-automatic-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generating the parser (automatic task)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-build-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional build targets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -579,6 +603,30 @@ It features an optional JavaFX tool-runner GUI.
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Building from source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generating-the-parser-automatic-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generating the parser (automatic task)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-build-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional build targets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -624,20 +672,22 @@ For an introduction to the JavaFX tool-runner GUI, see the <a href="../fxui/">Ja
 <p>After that it's as simple as:
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1">./gradlew<span class="w"> </span>build
 </span></code></pre></div></p>
+<h3 id="generating-the-parser-automatic-task">Generating the parser (automatic task)</h3>
 <p>After cloning or downloading the source code, the <code>Scanner.java</code> and <code>Parser.java</code> files must first
 be generated using the <a href="https://ssw.jku.at/Research/Projects/Coco/Java/Coco.jar">Coco/R library</a>.
 This should be done automatically by our custom <code>generateParser</code> Gradle build step.
 It will download Coco/R to the <code>lib/</code> folder and use it to create the needed files using the project's
 <a href="https://github.com/matwoess/jsourceprofiler/tree/main/jsourceprofiler-tool/src/main/parsergen/JavaFile.atg">ATG file</a> 
-(together with the <code>Scanner.frame</code> and <code>Parser.frame</code> files). 
-The task is added as a dependency to the <code>compileJava</code> task and will be called by Gradle when building the project.</p>
-<p>This step could also be done by downloading Coco/R manually and executing the following command in the
+(together with the <code>Scanner.frame</code> and <code>Parser.frame</code> files). The task is added as a dependency to the <code>compileJava</code> 
+and <code>sourcesJar</code> tasks and will be called by Gradle when building the project.</p>
+<p>This step could also be done manually by downloading Coco/R and executing the following command in the
 project's root directory, to (re-)generate the parser files at any time:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1">java<span class="w"> </span>-jar<span class="w"> </span>jsourceprofiler-tool/lib/Coco.jar<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-1-2"><span class="w">  </span>-o<span class="w"> </span>jsourceprofiler-tool/src/main/java/org/matwoess/jsourceprofiler/tool/instrument<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-1-3"><span class="w">  </span>-package<span class="w"> </span>org.matwoess.jsourceprofiler.tool.instrument<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-1-4"><span class="w">  </span>jsourceprofiler-tool/src/main/parsergen/JavaFile.atg<span class="w"> </span>
 </span></code></pre></div>
+<h3 id="additional-build-targets">Additional build targets</h3>
 <p>To create a single "fat" JAR that contains both <code>jsourceprofiler-tool</code> and <code>jsourceprofiler-common</code> in one archive
 (for easier use with the command-line) a <code>fatJar</code> build target is provided.
 This task is currently used to make the <code>profiler-x.y.z.jar</code> artifacts for the <a href="https://github.com/matwoess/jsourceprofiler/releases/">Releases</a> section.</p>

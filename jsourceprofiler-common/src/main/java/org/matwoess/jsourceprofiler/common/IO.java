@@ -36,14 +36,14 @@ public class IO {
   }
 
   /**
-   * Returns the <code>instrumented<code> directory relative to the {@link #outputDir}.
+   * Returns the <code>instrumented</code> directory relative to the {@link #outputDir}.
    */
   public static Path getInstrumentDir() {
     return getOutputDir().resolve("instrumented");
   }
 
   /**
-   * Returns the <code>classes<code> directory relative to the {@link #outputDir}.
+   * Returns the <code>classes</code> directory relative to the {@link #outputDir}.
    */
   public static Path getClassesDir() {
     return getOutputDir().resolve("classes");
@@ -85,7 +85,7 @@ public class IO {
    * Returns the path to the parsed project's metadata file.
    * This data is used for instrumentation and report generation.
    *
-   * @return <code>metadata.dat<code> relative to the {@link #outputDir}
+   * @return <code>metadata.dat</code> relative to the {@link #outputDir}
    */
   public static Path getMetadataPath() {
     return getOutputDir().resolve("metadata.dat");
@@ -95,7 +95,7 @@ public class IO {
    * Returns the path to the resulting counts file.
    * This data is written as soon as the instrumented version is run and is used for report generation.
    *
-   * @return <code>counts.dat<code> relative to the {@link #outputDir}
+   * @return <code>counts.dat</code> relative to the {@link #outputDir}
    */
   public static Path getCountsPath() {
     return getOutputDir().resolve("counts.dat");
@@ -104,7 +104,7 @@ public class IO {
   /**
    * Returns the containing root directory for the generated report.
    *
-   * @return <code>report<code> relative to the {@link #outputDir}
+   * @return <code>report</code> relative to the {@link #outputDir}
    */
   public static Path getReportDir() {
     return getOutputDir().resolve("report");

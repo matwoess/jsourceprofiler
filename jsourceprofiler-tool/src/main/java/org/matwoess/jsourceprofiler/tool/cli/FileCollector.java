@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Collects files with a specific file extension from a directory and its subdirectories.
- * <p/>
+ * <p>
  * The collected files can be filtered by excluding specific file names and paths.
  * Whether to include hidden directories can be specified.
  */
@@ -21,7 +21,7 @@ public class FileCollector {
 
   /**
    * Creates a new FileCollector for the given base directory and file extension.
-   * <p/>
+   * <p>
    * The file extension is case-insensitive and should not contain a leading dot.
    *
    * @param baseDir           the base directory to start the search from

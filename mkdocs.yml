@@ -18,6 +18,10 @@ nav:
   - Runtime Impact: runtime-impact.md
   - Limitations: limitations.md
   - Dependencies: dependencies.md
+  # Separator
+  - Additional Resources:
+    - Project Javadoc: javadoc/index.html
+
 
 theme:
   name: material
@@ -27,6 +31,7 @@ theme:
     - navigation.instant
     - navigation.instant.prefetch
     - navigation.instant.progress
+    - navigation.sections
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"

@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-      - improve-docs
+      - javadoc-publishing
     paths:
       - 'docs/**'
       - 'mkdocs.yml'
@@ -22,10 +22,22 @@ jobs:
         with:
           python-version: 3.x
 
+      - name: "Set up JDK"
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
       - name: "Install Python Dependencies"
         run: |
           python -m pip install --upgrade pip
           pip install mkdocs mkdocs-material
+
+      - name: "Generate Javadocs"
+        run: ./gradlew aggregateJavadoc
+
+      - name: "Copy Javadoc to docs"
+        run: cp -r build/docs/javadoc docs/javadoc
 
       - name: "Build the documentation"
         run: mkdocs build

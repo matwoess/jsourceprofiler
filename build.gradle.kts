@@ -5,10 +5,15 @@ plugins {
 
 tasks.register<Javadoc>("aggregateJavadoc") {
     title = "All Packages"
-    source = files(subprojects.flatMap {
-        // filter module-info.java files to avoid conflicts of multiple modules on same level
-        it.sourceSets.main.get().allJava.filter { f -> f.name != "module-info.java" }
-    }).asFileTree
+    val generateParserTask = tasks.getByPath(":jsourceprofiler-tool:generateParser")
+    dependsOn(generateParserTask)
+    source(
+        subprojects.flatMap {
+            // filter module-info.java files to avoid conflicts of multiple modules on same level
+            it.sourceSets.main.get().allJava.filter { f -> f.name != "module-info.java" }
+        },
+        generateParserTask.outputs
+    )
     classpath = files(subprojects.flatMap { it.sourceSets.main.get().compileClasspath })
     setDestinationDir(file("${layout.buildDirectory.get()}/docs/javadoc"))
     options {

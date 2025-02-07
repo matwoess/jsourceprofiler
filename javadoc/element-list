@@ -1,0 +1,10 @@
+auxiliary
+org.matwoess.jsourceprofiler.common
+org.matwoess.jsourceprofiler.fxui
+org.matwoess.jsourceprofiler.fxui.model
+org.matwoess.jsourceprofiler.fxui.tree
+org.matwoess.jsourceprofiler.fxui.util
+org.matwoess.jsourceprofiler.tool.cli
+org.matwoess.jsourceprofiler.tool.instrument
+org.matwoess.jsourceprofiler.tool.model
+org.matwoess.jsourceprofiler.tool.profile

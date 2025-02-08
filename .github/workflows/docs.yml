@@ -37,13 +37,17 @@ jobs:
         run: ./gradlew aggregateJavadoc
 
       - name: "Copy Javadoc to docs"
-        run: cp -r build/docs/javadoc docs/api
+        run: |
+          mkdir -p docs/docs/api
+          cp -r build/docs/javadoc docs/docs/api
 
       - name: "Generate Dark-Style Javadocs"
         run: ./gradlew aggregateJavadoc -Padd-stylesheet=docs/dark-javadoc.css
 
-      - name: "Copy Javadoc to docs"
-        run: cp -r build/docs/javadoc darkdocs/api
+      - name: "Copy dark Javadoc to darkdocs"
+        run: |
+          mkdir -p docs/darkdocs/api
+          cp -r build/docs/javadoc docs/darkdocs/api
 
       - name: "Build the documentation"
         run: mkdocs build

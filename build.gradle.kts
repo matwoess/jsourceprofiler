@@ -23,7 +23,7 @@ tasks.register<Javadoc>("aggregateJavadoc") {
         encoding = "UTF-8"
         memberLevel = JavadocMemberLevel.PROTECTED
         links = listOf(
-            "https://docs.oracle.com/javase/21/docs/api/",
+            "https://docs.oracle.com/en/java/javase/21/docs/api/",
             "https://download.java.net/java/GA/javafx20.0.1/docs/api/"
         )
         if (additionalStylesheet != null) {

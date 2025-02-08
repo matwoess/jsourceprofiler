@@ -18,9 +18,10 @@ nav:
   - Runtime Impact: runtime-impact.md
   - Limitations: limitations.md
   - Dependencies: dependencies.md
-  # Separator
+  # Added by workflow .github/workflows/docs.yml, warnings for missing files expected
   - Additional Resources:
-    - Project Javadoc: javadoc/index.html
+    - Javadoc: docs/api/index.html
+    - Javadoc (dark theme): darkdocs/api/index.html
 
 
 theme:

@@ -16,6 +16,8 @@ tasks.register<Javadoc>("aggregateJavadoc") {
     )
     classpath = files(subprojects.flatMap { it.sourceSets.main.get().compileClasspath })
     setDestinationDir(file("${layout.buildDirectory.get()}/docs/javadoc"))
+
+    val additionalStylesheet = project.findProperty("add-stylesheet") as String?
     options {
         this as StandardJavadocDocletOptions
         encoding = "UTF-8"
@@ -24,5 +26,9 @@ tasks.register<Javadoc>("aggregateJavadoc") {
             "https://docs.oracle.com/javase/21/docs/api/",
             "https://download.java.net/java/GA/javafx20.0.1/docs/api/"
         )
+        if (additionalStylesheet != null) {
+            println("Adding additional stylesheet: $additionalStylesheet")
+            addStringOption("-add-stylesheet", additionalStylesheet)
+        }
     }
 }

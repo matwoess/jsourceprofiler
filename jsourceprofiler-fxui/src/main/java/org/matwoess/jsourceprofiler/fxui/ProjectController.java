@@ -18,7 +18,7 @@ import java.nio.file.Path;
  * The controller for the project selection dialog.
  */
 public class ProjectController {
-  public Stage projectStage;
+  private Stage projectStage;
 
   @FXML
   private Button btnProjectRoot;
@@ -27,7 +27,8 @@ public class ProjectController {
   @FXML
   private Button btnOpenProject;
 
-  public BooleanBinding invalidProjectRootPath;
+  @SuppressWarnings("FieldCanBeLocal")
+  private BooleanBinding invalidProjectRootPath;
 
   /**
    * Initializes the UI of the project selection dialog.
@@ -44,6 +45,7 @@ public class ProjectController {
    * Initializes the properties and bindings of the project selection dialog.
    * <p>
    * Additionally, the last project root path is restored using {@link #restoreLastProjectPath}.
+   *
    * @param projectRootProperty the property to be set with the selected project root path
    */
   void initProperties(ObjectProperty<Path> projectRootProperty) {
@@ -60,6 +62,7 @@ public class ProjectController {
 
   /**
    * Opens a directory chooser dialog and sets the chosen path on the given project root property.
+   *
    * @param projectRootProperty the project root property to set
    */
   private void onPickProjectRoot(ObjectProperty<Path> projectRootProperty) {

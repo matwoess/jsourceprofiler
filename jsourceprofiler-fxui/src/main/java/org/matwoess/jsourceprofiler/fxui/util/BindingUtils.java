@@ -69,6 +69,10 @@ public class BindingUtils {
    * Specialized version of {@link #createBorderBinding(ObjectProperty, BooleanBinding)} for StringProperties.
    * <p>
    * The neutral border is returned if the property is empty (not null).
+   *
+   * @param stringProperty    the property to create the binding for
+   * @param invalidityBinding the binding that determines whether the property is invalid
+   * @return the created border binding
    */
   public static ObjectBinding<Border> createBorderBinding(StringProperty stringProperty, BooleanBinding invalidityBinding) {
     return Bindings.createObjectBinding(

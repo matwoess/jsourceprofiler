@@ -9,36 +9,54 @@ import java.nio.file.Path;
  * Each terminal has its own way to wrap commands and how to call it.
  */
 public enum Terminal {
+  /**
+   * The Windows Command Prompt.
+   */
   WINDOWS_CMD {
     @Override
     String getExecutable() {
       return "cmd.exe";
     }
   },
+  /**
+   * The Windows PowerShell.
+   */
   WINDOWS_POWERSHELL {
     @Override
     String getExecutable() {
       return "powershell.exe";
     }
   },
+  /**
+   * The GNOME Terminal.
+   */
   GNOME_TERMINAL {
     @Override
     String getExecutable() {
       return "gnome-terminal";
     }
   },
+  /**
+   * The GNOME Console.
+   */
   GNOME_CONSOLE {
     @Override
     String getExecutable() {
       return "kgx";
     }
   },
+  /**
+   * The KDE Konsole.
+   */
   KDE_KONSOLE {
     @Override
     String getExecutable() {
       return "konsole";
     }
   },
+  /**
+   * The macOS Terminal.
+   */
   MACOS_TERMINAL {
     @Override
     String getExecutable() {

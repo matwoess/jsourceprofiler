@@ -36,11 +36,29 @@ public class AppState {
   public final BooleanProperty syncCounters = new SimpleBooleanProperty(false);
   public final ObjectProperty<Terminal> terminal = new SimpleObjectProperty<>(Terminal.getDefaultSystemTerminal());
 
+  /**
+   * Helper binding telling us whether the currently specified main file path is invalid.
+   */
   public BooleanBinding invalidMainFilePath;
+  /**
+   * Helper binding telling us whether the current sources directory path is invalid.
+   */
   public BooleanBinding invalidSourcesDirPath;
+  /**
+   * Helper binding telling us whether the report index file exists.
+   */
   public BooleanBinding reportIndexFileExists;
+  /**
+   * Helper binding telling us whether the parameters file exists.
+   */
   public BooleanBinding parametersFileExists;
+  /**
+   * Helper binding telling us whether the metadata file exists.
+   */
   public BooleanBinding metadataFileExists;
+  /**
+   * Helper binding telling us whether the counts file exists.
+   */
   public BooleanBinding countsFileExists;
 
   public AppState() {

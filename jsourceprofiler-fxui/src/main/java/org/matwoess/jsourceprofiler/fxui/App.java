@@ -20,6 +20,11 @@ import java.util.Objects;
  * Launches the application and initializes the project selection dialog and main window.
  */
 public class App extends Application {
+  /**
+   * The main method of the JavaFx application.
+   *
+   * @param args the command line arguments
+   */
   public static void main(String[] args) {
     launch(args);
   }

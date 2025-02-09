@@ -14,11 +14,29 @@ import java.util.List;
  * It also stores the source file path and the relative path to the sources root.
  */
 public class JavaFile implements Serializable {
+  /**
+   * The beginning of the imports section in the file (after the package declaration and comments/copyright).
+   */
   public int beginOfImports = 0;
+  /**
+   * The package name of the file (if any).
+   */
   public String packageName;
+  /**
+   * The list of all top-level classes in this file.
+   */
   public List<JClass> topLevelClasses;
+  /**
+   * The list of found blocks inside this file.
+   */
   public List<Block> foundBlocks;
+  /**
+   * The associated original source file path.
+   */
   public transient Path sourceFile;
+  /**
+   * The relative path to the file from the original sources root directory.
+   */
   public transient Path relativePath;
 
   /**
@@ -42,6 +60,8 @@ public class JavaFile implements Serializable {
   /**
    * Like {@link JavaFile#JavaFile(Path, Path)} but relative to the current working directory.
    * The relative path will be set to the file name itself.
+   *
+   * @param sourceFile the source file path
    */
   public JavaFile(Path sourceFile) {
     this.sourceFile = sourceFile;

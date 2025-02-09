@@ -7,7 +7,8 @@ import static org.matwoess.jsourceprofiler.tool.model.ControlBreak.Kind.*;
 
 /**
  * This class is used to represent a control flow break.
- * @param kind the kind of control break (one of {@link Kind})
+ *
+ * @param kind  the kind of control break (one of {@link Kind})
  * @param label the target label of the control break, if any
  */
 public record ControlBreak(Kind kind, String label) implements Serializable {
@@ -15,10 +16,32 @@ public record ControlBreak(Kind kind, String label) implements Serializable {
   /**
    * The kind of control flow break.
    */
-  public enum Kind {BREAK, CONTINUE, RETURN, YIELD, THROW}
+  public enum Kind {
+    /**
+     * A break statement.
+     */
+    BREAK,
+    /**
+     * A continue statement.
+     */
+    CONTINUE,
+    /**
+     * A return statement.
+     */
+    RETURN,
+    /**
+     * A switch expression yield statement.
+     */
+    YIELD,
+    /**
+     * A throw statement.
+     */
+    THROW
+  }
 
   /**
    * Decide when to stop propagating a control break at a given parent block.
+   *
    * @param block the block to check
    * @return true if this kind of control flow break should be propagated only until the given block
    */
@@ -35,6 +58,7 @@ public record ControlBreak(Kind kind, String label) implements Serializable {
 
   /**
    * Create a new control flow break from a keyword token value.
+   *
    * @param tokenValue the keyword string of the control break
    * @return a new control break instance with a kind matching the token string
    */
@@ -52,8 +76,9 @@ public record ControlBreak(Kind kind, String label) implements Serializable {
 
   /**
    * Create a new control flow break from a keyword token value and a label.
+   *
    * @param tokenValue the keyword of the control break
-   * @param label the target label of the control break
+   * @param label      the target label of the control break
    * @return a new control break instance with the given label
    */
   public static ControlBreak fromTokenWithLabel(String tokenValue, String label) {

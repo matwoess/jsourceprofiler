@@ -13,12 +13,33 @@ import java.util.Objects;
  * It also contains a list of methods and a list of class-level blocks.
  */
 public class JClass implements Serializable, Component {
+  /**
+   * The name of the class.
+   */
   public String name;
+  /**
+   * The type of the class (one of {@link ClassType}).
+   */
   public ClassType classType;
+  /**
+   * The package name of the class (if any).
+   */
   public String packageName;
+  /**
+   * The parent class of this class (if nested).
+   */
   public JClass parentClass;
+  /**
+   * The list of nested classes inside this class.
+   */
   public final List<JClass> innerClasses = new ArrayList<>();
+  /**
+   * The list of methods in this class.
+   */
   public final List<Method> methods = new ArrayList<>();
+  /**
+   * The list of class-level blocks inside this class.
+   */
   public final List<Block> classBlocks = new ArrayList<>();
 
   /**

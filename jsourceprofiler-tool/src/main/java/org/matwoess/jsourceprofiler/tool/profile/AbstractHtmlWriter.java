@@ -23,9 +23,21 @@ import java.util.Date;
  */
 public abstract class AbstractHtmlWriter {
   final StringBuilder content = new StringBuilder();
+  /**
+   * The title for the generated HTML document.
+   */
   public String title;
+  /**
+   * All scripts to include in the header of the resulting HTML document.
+   */
   public String[] includeScripts;
+  /**
+   * The scripts to include at the end of the HTML document body.
+   */
   public String[] bodyScripts;
+  /**
+   * The CSS files to include in the header of the HTML document.
+   */
   public String[] cssFiles;
 
   /**

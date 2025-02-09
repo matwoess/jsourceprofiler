@@ -9,12 +9,13 @@ import java.util.Objects;
 
 /**
  * Represents the command line arguments for the profiler tool.
- * @param runMode one of {@link RunMode}
- * @param targetPath the path to the main Java file (or directory for instrument-only mode)
- * @param sourcesDir the directory with additional Java files to instrument
- * @param syncCounters whether to instrument using synchronized counter-increments
+ *
+ * @param runMode       one of {@link RunMode}
+ * @param targetPath    the path to the main Java file (or directory for instrument-only mode)
+ * @param sourcesDir    the directory with additional Java files to instrument
+ * @param syncCounters  whether to instrument using synchronized counter-increments
  * @param verboseOutput whether to output verbose info about instrumentation of files
- * @param programArgs the program arguments to pass to the main method
+ * @param programArgs   the program arguments to pass to the main method
  */
 public record Arguments(
     RunMode runMode,
@@ -26,6 +27,7 @@ public record Arguments(
 
   /**
    * Parses the command line arguments and returns an {@link Arguments} object.
+   *
    * @param args the tool's command line string arguments
    * @return the parsed arguments as a record
    * @throws IllegalArgumentException if insufficient, too many, or invalid arguments are given
@@ -111,10 +113,18 @@ public record Arguments(
     return new Arguments(runMode, targetPath, sourcesDir, syncCounters, verboseOutput, programArgs);
   }
 
+  /**
+   * Prints tool usage information to the standard output.
+   */
   public static void printUsage() {
     System.out.println(getUsage());
   }
 
+  /**
+   * Returns the tool usage information as a string.
+   *
+   * @return the usage information
+   */
   public static String getUsage() {
     return """
         Usage: profiler [options] <main file> [program args]

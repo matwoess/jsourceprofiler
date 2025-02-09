@@ -18,8 +18,17 @@ import java.util.List;
  * <code>continue</code>s and <code>return</code>s, etc.
  */
 public class CodeRegion implements Serializable, Component {
+  /**
+   * The unique identifier of this region.
+   */
   public int id;
+  /**
+   * The start position of the code region in the source file.
+   */
   public CodePosition beg;
+  /**
+   * The end position of the code region in the source file.
+   */
   public CodePosition end;
   /**
    * The block this region belongs to.

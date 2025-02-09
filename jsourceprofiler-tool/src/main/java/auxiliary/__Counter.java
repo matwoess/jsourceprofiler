@@ -89,6 +89,11 @@ public class __Counter {
 
   /**
    * Overloaded version of {@link #incLambda(int, Runnable)} using a Supplier with a generic return type.
+   *
+   * @param <T>      the return type of the wrapped lambda <code>Supplier</code>
+   * @param n        the block id
+   * @param function the original lambda that is wrapped in a <code>Supplier</code>
+   * @return the result of the wrapped lambda
    */
   public static <T> T incLambda(int n, Supplier<T> function) {
     __Counter.inc(n);
@@ -97,6 +102,9 @@ public class __Counter {
 
   /**
    * Synchronized version of {@link #incLambda(int, Runnable)}.
+   *
+   * @param n      the block id
+   * @param method the original lambda that is wrapped in a <code>Runnable</code>
    */
   public static void incLambdaSync(int n, Runnable method) {
     __Counter.incSync(n);
@@ -105,6 +113,11 @@ public class __Counter {
 
   /**
    * Synchronized version of {@link #incLambda(int, Supplier)}.
+   *
+   * @param <T>      the return type of the wrapped lambda <code>Supplier</code>
+   * @param n        the block id
+   * @param function the original lambda that is wrapped in a <code>Supplier</code>
+   * @return the result of the wrapped lambda
    */
   public static <T> T incLambdaSync(int n, Supplier<T> function) {
     __Counter.incSync(n);

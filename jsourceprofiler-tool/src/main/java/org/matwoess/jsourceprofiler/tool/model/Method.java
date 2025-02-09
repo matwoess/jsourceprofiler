@@ -10,8 +10,17 @@ import java.util.List;
  * Stores the containing class, the method name and the block representing the method body.
  */
 public class Method implements Serializable, Component {
+  /**
+   * The name of the method.
+   */
   public final String name;
-  public JClass parentClass;
+  /**
+   * The containing class this method belongs to.
+   */
+  private JClass parentClass;
+  /**
+   * The block representing the method body (if not abstract).
+   */
   public Block methodBlock = null;
 
   /**

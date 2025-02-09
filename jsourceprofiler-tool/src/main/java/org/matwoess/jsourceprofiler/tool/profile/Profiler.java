@@ -17,6 +17,11 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.PrimitiveIterator;
 
+/**
+ * The main class for profiling an already instrumented Java project.
+ * <p>
+ * It compiles the instrumented files, runs the main class and generates the report.
+ */
 public class Profiler {
   private final JavaFile mainJavaFile;
   private final JavaFile[] additionalJavaFiles;

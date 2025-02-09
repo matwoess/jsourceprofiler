@@ -10,13 +10,37 @@ import java.util.Objects;
  * It is the most important class of the model package and used for correct instrumentation and report generation.
  */
 public class Block implements Serializable, Component {
+  /**
+   * The unique identifier of this block.
+   */
   public int id;
+  /**
+   * The class this block belongs to.
+   */
   public JClass clazz;
-  public Method method;
-  public Block parentBlock;
+  /**
+   * The method this block belongs to.
+   */
+  private Method method;
+  /**
+   * The outer block surrounding this block.
+   */
+  private Block parentBlock;
+  /**
+   * The start position of the block in the source file.
+   */
   public CodePosition beg;
+  /**
+   * The end position of the block in the source file.
+   */
   public CodePosition end;
+  /**
+   * The type of the block (one of {@link BlockType}).
+   */
   public BlockType blockType;
+  /**
+   * Whether this block is a single statement block (no curly braces).
+   */
   public boolean isSingleStatement;
 
   /**

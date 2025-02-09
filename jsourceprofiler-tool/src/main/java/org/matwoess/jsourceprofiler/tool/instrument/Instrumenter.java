@@ -27,7 +27,7 @@ import static org.matwoess.jsourceprofiler.tool.model.ControlBreak.Kind.THROW;
 public class Instrumenter {
   JavaFile[] javaFiles;
   int blockCounter;
-  public String incRefAdd;
+  private final String incRefAdd;
   boolean verboseOutput;
 
   /**

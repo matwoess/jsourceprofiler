@@ -4,7 +4,18 @@ package org.matwoess.jsourceprofiler.common;
  * The possible run modes of the tool.
  */
 public enum RunMode {
-  DEFAULT, INSTRUMENT_ONLY, REPORT_ONLY;
+  /**
+   * Instrument, compile, execute the program and generate the report.
+   */
+  DEFAULT,
+  /**
+   * Only instrument a file or directory.
+   */
+  INSTRUMENT_ONLY,
+  /**
+   * Only generate the report from existing counts, metadata and source code files.
+   */
+  REPORT_ONLY;
 
   /**
    * {@return a description for the run mode}

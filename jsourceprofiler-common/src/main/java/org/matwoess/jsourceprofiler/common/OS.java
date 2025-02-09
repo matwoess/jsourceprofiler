@@ -4,7 +4,22 @@ package org.matwoess.jsourceprofiler.common;
  * Helper enum class for operating system dependent get actions.
  */
 public enum OS {
-  WINDOWS, LINUX, MAC, SOLARIS;
+  /**
+   * The Windows operating system.
+   */
+  WINDOWS,
+  /**
+   * The Linux operating system.
+   */
+  LINUX,
+  /**
+   * The macOS operating system.
+   */
+  MAC,
+  /**
+   * The Solaris operating system.
+   */
+  SOLARIS;
 
   // persist OS in variable for faster access next time
   private static OS os = null;

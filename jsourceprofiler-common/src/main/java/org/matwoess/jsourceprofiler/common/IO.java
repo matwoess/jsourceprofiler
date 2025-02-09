@@ -31,12 +31,19 @@ public class IO {
    */
   public static Path outputDir = Path.of(".profiler");
 
+  /**
+   * Retrieves the current output directory for the profiler.
+   *
+   * @return the output directory path
+   */
   public static Path getOutputDir() {
     return outputDir;
   }
 
   /**
    * Returns the <code>instrumented</code> directory relative to the {@link #outputDir}.
+   *
+   * @return the path of the instrumented directory
    */
   public static Path getInstrumentDir() {
     return getOutputDir().resolve("instrumented");
@@ -44,6 +51,8 @@ public class IO {
 
   /**
    * Returns the <code>classes</code> directory relative to the {@link #outputDir}.
+   *
+   * @return the path of the classes directory
    */
   public static Path getClassesDir() {
     return getOutputDir().resolve("classes");
@@ -122,6 +131,7 @@ public class IO {
   /**
    * Returns the path of a JavaScript or CSS report file relative to the report directory.
    *
+   * @param reportResource the name of the resource file to be resolved against the report directory
    * @return the relative path of a source file in the report directory
    */
   public static Path getReportResourcePath(String reportResource) {
@@ -197,6 +207,7 @@ public class IO {
   /**
    * Extract a copy of a resource file from the project directory or the .jar file.
    *
+   * @param <T>           the type of the resource class
    * @param resourceClass the anchor class used to locate the resource
    * @param resourceName  the name of the resource file to be extracted
    * @param destination   path where the resource is copied to

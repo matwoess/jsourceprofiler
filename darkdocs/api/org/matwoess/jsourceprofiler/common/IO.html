@@ -210,7 +210,9 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getOutputDir()" class="member-name-link">getOutputDir</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Retrieves the current output directory for the profiler.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getReportDir()" class="member-name-link">getReportDir</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
@@ -313,6 +315,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getOutputDir()">
 <h3>getOutputDir</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></span>&nbsp;<span class="element-name">getOutputDir</span>()</div>
+<div class="block">Retrieves the current output directory for the profiler.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the output directory path</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -320,6 +327,10 @@ loadScripts(document, 'script');</script>
 <h3>getInstrumentDir</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></span>&nbsp;<span class="element-name">getInstrumentDir</span>()</div>
 <div class="block">Returns the <code>instrumented</code> directory relative to the <a href="#outputDir"><code>outputDir</code></a>.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the path of the instrumented directory</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -327,6 +338,10 @@ loadScripts(document, 'script');</script>
 <h3>getClassesDir</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></span>&nbsp;<span class="element-name">getClassesDir</span>()</div>
 <div class="block">Returns the <code>classes</code> directory relative to the <a href="#outputDir"><code>outputDir</code></a>.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the path of the classes directory</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -420,6 +435,8 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></span>&nbsp;<span class="element-name">getReportResourcePath</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;reportResource)</span></div>
 <div class="block">Returns the path of a JavaScript or CSS report file relative to the report directory.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>reportResource</code> - the name of the resource file to be resolved against the report directory</dd>
 <dt>Returns:</dt>
 <dd>the relative path of a source file in the report directory</dd>
 </dl>
@@ -510,6 +527,8 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;destination)</span></div>
 <div class="block">Extract a copy of a resource file from the project directory or the .jar file.</div>
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - the type of the resource class</dd>
 <dt>Parameters:</dt>
 <dd><code>resourceClass</code> - the anchor class used to locate the resource</dd>
 <dd><code>resourceName</code> - the name of the resource file to be extracted</dd>

@@ -67,14 +67,17 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>beg</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/CodePosition.html" title="class in org.matwoess.jsourceprofiler.tool.model">CodePosition</a> beg</pre>
+<div class="block">The start position of the block in the source file.</div>
 </li>
 <li class="block-list">
 <h5>blockType</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/BlockType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model">BlockType</a> blockType</pre>
+<div class="block">The type of the block (one of <a href="org/matwoess/jsourceprofiler/tool/model/BlockType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model"><code>BlockType</code></a>).</div>
 </li>
 <li class="block-list">
 <h5>clazz</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/JClass.html" title="class in org.matwoess.jsourceprofiler.tool.model">JClass</a> clazz</pre>
+<div class="block">The class this block belongs to.</div>
 </li>
 <li class="block-list">
 <h5>codeRegions</h5>
@@ -89,10 +92,12 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>end</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/CodePosition.html" title="class in org.matwoess.jsourceprofiler.tool.model">CodePosition</a> end</pre>
+<div class="block">The end position of the block in the source file.</div>
 </li>
 <li class="block-list">
 <h5>id</h5>
 <pre>int id</pre>
+<div class="block">The unique identifier of this block.</div>
 </li>
 <li class="block-list">
 <h5>incInsertOffset</h5>
@@ -107,6 +112,7 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>isSingleStatement</h5>
 <pre>boolean isSingleStatement</pre>
+<div class="block">Whether this block is a single statement block (no curly braces).</div>
 </li>
 <li class="block-list">
 <h5>labels</h5>
@@ -116,10 +122,12 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>method</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/Method.html" title="class in org.matwoess.jsourceprofiler.tool.model">Method</a> method</pre>
+<div class="block">The method this block belongs to.</div>
 </li>
 <li class="block-list">
 <h5>parentBlock</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/Block.html" title="class in org.matwoess.jsourceprofiler.tool.model">Block</a> parentBlock</pre>
+<div class="block">The outer block surrounding this block.</div>
 </li>
 </ul>
 </section>
@@ -164,6 +172,7 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>beg</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/CodePosition.html" title="class in org.matwoess.jsourceprofiler.tool.model">CodePosition</a> beg</pre>
+<div class="block">The start position of the code region in the source file.</div>
 </li>
 <li class="block-list">
 <h5>block</h5>
@@ -178,10 +187,12 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>end</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/CodePosition.html" title="class in org.matwoess.jsourceprofiler.tool.model">CodePosition</a> end</pre>
+<div class="block">The end position of the code region in the source file.</div>
 </li>
 <li class="block-list">
 <h5>id</h5>
 <pre>int id</pre>
+<div class="block">The unique identifier of this region.</div>
 </li>
 </ul>
 </section>
@@ -259,18 +270,22 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>beginOfImports</h5>
 <pre>int beginOfImports</pre>
+<div class="block">The beginning of the imports section in the file (after the package declaration and comments/copyright).</div>
 </li>
 <li class="block-list">
 <h5>foundBlocks</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="org/matwoess/jsourceprofiler/tool/model/Block.html" title="class in org.matwoess.jsourceprofiler.tool.model">Block</a>&gt; foundBlocks</pre>
+<div class="block">The list of found blocks inside this file.</div>
 </li>
 <li class="block-list">
 <h5>packageName</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> packageName</pre>
+<div class="block">The package name of the file (if any).</div>
 </li>
 <li class="block-list">
 <h5>topLevelClasses</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="org/matwoess/jsourceprofiler/tool/model/JClass.html" title="class in org.matwoess.jsourceprofiler.tool.model">JClass</a>&gt; topLevelClasses</pre>
+<div class="block">The list of all top-level classes in this file.</div>
 </li>
 </ul>
 </section>
@@ -290,30 +305,37 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>classBlocks</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="org/matwoess/jsourceprofiler/tool/model/Block.html" title="class in org.matwoess.jsourceprofiler.tool.model">Block</a>&gt; classBlocks</pre>
+<div class="block">The list of class-level blocks inside this class.</div>
 </li>
 <li class="block-list">
 <h5>classType</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/ClassType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model">ClassType</a> classType</pre>
+<div class="block">The type of the class (one of <a href="org/matwoess/jsourceprofiler/tool/model/ClassType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model"><code>ClassType</code></a>).</div>
 </li>
 <li class="block-list">
 <h5>innerClasses</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="org/matwoess/jsourceprofiler/tool/model/JClass.html" title="class in org.matwoess.jsourceprofiler.tool.model">JClass</a>&gt; innerClasses</pre>
+<div class="block">The list of nested classes inside this class.</div>
 </li>
 <li class="block-list">
 <h5>methods</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="org/matwoess/jsourceprofiler/tool/model/Method.html" title="class in org.matwoess.jsourceprofiler.tool.model">Method</a>&gt; methods</pre>
+<div class="block">The list of methods in this class.</div>
 </li>
 <li class="block-list">
 <h5>name</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> name</pre>
+<div class="block">The name of the class.</div>
 </li>
 <li class="block-list">
 <h5>packageName</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> packageName</pre>
+<div class="block">The package name of the class (if any).</div>
 </li>
 <li class="block-list">
 <h5>parentClass</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/JClass.html" title="class in org.matwoess.jsourceprofiler.tool.model">JClass</a> parentClass</pre>
+<div class="block">The parent class of this class (if nested).</div>
 </li>
 </ul>
 </section>
@@ -333,14 +355,17 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>methodBlock</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/Block.html" title="class in org.matwoess.jsourceprofiler.tool.model">Block</a> methodBlock</pre>
+<div class="block">The block representing the method body (if not abstract).</div>
 </li>
 <li class="block-list">
 <h5>name</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> name</pre>
+<div class="block">The name of the method.</div>
 </li>
 <li class="block-list">
 <h5>parentClass</h5>
 <pre><a href="org/matwoess/jsourceprofiler/tool/model/JClass.html" title="class in org.matwoess.jsourceprofiler.tool.model">JClass</a> parentClass</pre>
+<div class="block">The containing class this method belongs to.</div>
 </li>
 </ul>
 </section>

@@ -120,13 +120,19 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code><a href="CodePosition.html" title="class in org.matwoess.jsourceprofiler.tool.model">CodePosition</a></code></div>
 <div class="col-second even-row-color"><code><a href="#beg" class="member-name-link">beg</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The start position of the block in the source file.</div>
+</div>
 <div class="col-first odd-row-color"><code><a href="BlockType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model">BlockType</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#blockType" class="member-name-link">blockType</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">The type of the block (one of <a href="BlockType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model"><code>BlockType</code></a>).</div>
+</div>
 <div class="col-first even-row-color"><code><a href="JClass.html" title="class in org.matwoess.jsourceprofiler.tool.model">JClass</a></code></div>
 <div class="col-second even-row-color"><code><a href="#clazz" class="member-name-link">clazz</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The class this block belongs to.</div>
+</div>
 <div class="col-first odd-row-color"><code>final <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="CodeRegion.html" title="class in org.matwoess.jsourceprofiler.tool.model">CodeRegion</a>&gt;</code></div>
 <div class="col-second odd-row-color"><code><a href="#codeRegions" class="member-name-link">codeRegions</a></code></div>
 <div class="col-last odd-row-color">
@@ -139,7 +145,9 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 </div>
 <div class="col-first odd-row-color"><code><a href="CodePosition.html" title="class in org.matwoess.jsourceprofiler.tool.model">CodePosition</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#end" class="member-name-link">end</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">The end position of the block in the source file.</div>
+</div>
 <div class="col-first even-row-color"><code>long</code></div>
 <div class="col-second even-row-color"><code><a href="#hits" class="member-name-link">hits</a></code></div>
 <div class="col-last even-row-color">
@@ -147,7 +155,9 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 </div>
 <div class="col-first odd-row-color"><code>int</code></div>
 <div class="col-second odd-row-color"><code><a href="#id" class="member-name-link">id</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">The unique identifier of this block.</div>
+</div>
 <div class="col-first even-row-color"><code>int</code></div>
 <div class="col-second even-row-color"><code><a href="#incInsertOffset" class="member-name-link">incInsertOffset</a></code></div>
 <div class="col-last even-row-color">
@@ -165,18 +175,14 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 </div>
 <div class="col-first odd-row-color"><code>boolean</code></div>
 <div class="col-second odd-row-color"><code><a href="#isSingleStatement" class="member-name-link">isSingleStatement</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">Whether this block is a single statement block (no curly braces).</div>
+</div>
 <div class="col-first even-row-color"><code>final <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second even-row-color"><code><a href="#labels" class="member-name-link">labels</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">The labels associated with this block.</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="Method.html" title="class in org.matwoess.jsourceprofiler.tool.model">Method</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#method" class="member-name-link">method</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code><a href="Block.html" title="class in org.matwoess.jsourceprofiler.tool.model">Block</a></code></div>
-<div class="col-second even-row-color"><code><a href="#parentBlock" class="member-name-link">parentBlock</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -286,48 +292,42 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <section class="detail" id="id">
 <h3>id</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">id</span></div>
+<div class="block">The unique identifier of this block.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="clazz">
 <h3>clazz</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="JClass.html" title="class in org.matwoess.jsourceprofiler.tool.model">JClass</a></span>&nbsp;<span class="element-name">clazz</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="method">
-<h3>method</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Method.html" title="class in org.matwoess.jsourceprofiler.tool.model">Method</a></span>&nbsp;<span class="element-name">method</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="parentBlock">
-<h3>parentBlock</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Block.html" title="class in org.matwoess.jsourceprofiler.tool.model">Block</a></span>&nbsp;<span class="element-name">parentBlock</span></div>
+<div class="block">The class this block belongs to.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="beg">
 <h3>beg</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CodePosition.html" title="class in org.matwoess.jsourceprofiler.tool.model">CodePosition</a></span>&nbsp;<span class="element-name">beg</span></div>
+<div class="block">The start position of the block in the source file.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="end">
 <h3>end</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CodePosition.html" title="class in org.matwoess.jsourceprofiler.tool.model">CodePosition</a></span>&nbsp;<span class="element-name">end</span></div>
+<div class="block">The end position of the block in the source file.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="blockType">
 <h3>blockType</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BlockType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model">BlockType</a></span>&nbsp;<span class="element-name">blockType</span></div>
+<div class="block">The type of the block (one of <a href="BlockType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model"><code>BlockType</code></a>).</div>
 </section>
 </li>
 <li>
 <section class="detail" id="isSingleStatement">
 <h3>isSingleStatement</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isSingleStatement</span></div>
+<div class="block">Whether this block is a single statement block (no curly braces).</div>
 </section>
 </li>
 <li>

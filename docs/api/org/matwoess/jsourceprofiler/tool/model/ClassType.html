@@ -100,7 +100,7 @@ loadScripts(document, 'script');</script>
 <div class="block">This enum is used to represent the locality type for a class definition.
  <p>
  It does not distinguish between <code>class</code>, <code>interface</code>, <code>enum</code> or <code>record</code>.
- Rather is differentiates between common top-level or nested classes and <code>anonymous</code> and <code>local</code> ones.
+ Rather it differentiates between common top-level or nested classes and <code>anonymous</code> and <code>local</code> ones.
  <p>
  Used to correctly restore the previous block when exiting local or anonymous classes inside methods.</div>
 </section>
@@ -124,11 +124,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Enum Constant</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code><a href="#ANONYMOUS" class="member-name-link">ANONYMOUS</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">An anonymous class.</div>
+</div>
 <div class="col-first odd-row-color"><code><a href="#CLASS" class="member-name-link">CLASS</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">A default class, interface, enum or record.</div>
+</div>
 <div class="col-first even-row-color"><code><a href="#LOCAL" class="member-name-link">LOCAL</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">A local class.</div>
+</div>
 </div>
 </section>
 </li>
@@ -178,18 +184,21 @@ the order they are declared.</div>
 <section class="detail" id="CLASS">
 <h3>CLASS</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="ClassType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model">ClassType</a></span>&nbsp;<span class="element-name">CLASS</span></div>
+<div class="block">A default class, interface, enum or record.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="ANONYMOUS">
 <h3>ANONYMOUS</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="ClassType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model">ClassType</a></span>&nbsp;<span class="element-name">ANONYMOUS</span></div>
+<div class="block">An anonymous class.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="LOCAL">
 <h3>LOCAL</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="ClassType.html" title="enum class in org.matwoess.jsourceprofiler.tool.model">ClassType</a></span>&nbsp;<span class="element-name">LOCAL</span></div>
+<div class="block">A local class.</div>
 </section>
 </li>
 </ul>

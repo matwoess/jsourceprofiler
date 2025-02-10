@@ -6,18 +6,11 @@ Optionally, a JavaFX GUI is available to configure the parameters and run the to
 
 The tool can parse Java **21** language syntax and should be executed with a JDK of version 17 or higher.
 
-## Thesis Paper
-
-This project was created as part of my master's thesis at the Institute for System Software ([SSW](https://ssw.jku.at/))
-of the Johannes Kepler University ([JKU](https://www.jku.at/)), located in Linz, Austria.
-Please see the [thesis paper](https://ssw.jku.at/Teaching/MasterTheses/JavaProfiler/Thesis.pdf) 
-(published February 2024) or the documentation for further details.
-
 ## Documentation
 
 The [Documentation](https://matwoess.github.io/jsourceprofiler)
-contains a more comprehensive guide on how to install and use the tool.
-It also explains implementation details and (current) limitations.
+contains a comprehensive guide on how to install and use the tool.
+It also explains its workflow, implementation details and (current) limitations.
 
 ### Quick Links:
 - [Introduction](https://matwoess.github.io/jsourceprofiler/)
@@ -25,6 +18,18 @@ It also explains implementation details and (current) limitations.
 - [Usage](https://matwoess.github.io/jsourceprofiler/usage)
 - [JavaFx UI](https://matwoess.github.io/jsourceprofiler/fxui)
 - [Report](https://matwoess.github.io/jsourceprofiler/report)
+
+For an overview over the source code the page also hosts the Javadoc API:
+
+- [Javadoc API](https://matwoess.github.io/jsourceprofiler/docs/api)
+- [Javadoc API (Dark Theme)](https://matwoess.github.io/jsourceprofiler/darkdocs/api)
+
+## Thesis Paper
+
+This project was created as part of my master's thesis at the Institute for System Software ([SSW](https://ssw.jku.at/))
+of the Johannes Kepler University ([JKU](https://www.jku.at/)), located in Linz, Austria.
+For a more in-depth (but slightly out of date) source of information, please see the [thesis paper](https://ssw.jku.at/Teaching/MasterTheses/JavaProfiler/Thesis.pdf)
+(published February 2024).
 
 ## Future Work
 

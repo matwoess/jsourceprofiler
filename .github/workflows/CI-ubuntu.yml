@@ -1,0 +1,15 @@
+name: "CI Ubuntu"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'jsourceprofiler-tool/src/**'
+      - 'jsourceprofiler-common/src/**'
+
+jobs:
+  linux-unittests:
+    uses: ./.github/workflows/CI.yml
+    with:
+      os: ubuntu-24.04

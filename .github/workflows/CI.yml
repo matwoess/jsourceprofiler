@@ -1,23 +1,17 @@
-name: "Run Tests & Upload Report"
+name: "CI"
 
 on:
-  workflow_dispatch:
+  # OS parameter for reusable workflow
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
 
 jobs:
   unittests:
-    name: "Run unit tests (${{ matrix.os }})"
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ ubuntu-24.04, macos-latest, windows-latest ]
-        include:
-          - os: ubuntu-24.04
-            osname: "linux"
-          - os: macos-latest
-            osname: "macos"
-          - os: windows-latest
-            osname: "windows"
+    name: "Run unit tests (${{ inputs.os }})"
+    runs-on: ${{ inputs.os }}
 
     steps:
       - name: "Checkout code"
@@ -42,19 +36,19 @@ jobs:
       - name: "Upload Gradle report - tool"
         uses: actions/upload-artifact@v4
         with:
-          name: report-tool-${{ matrix.osname }}
+          name: gradle-report-tool-${{ inputs.os }}
           path: jsourceprofiler-tool/build/reports/tests/
 
       - name: "Upload Gradle report - common"
         uses: actions/upload-artifact@v4
         with:
-          name: report-common-${{ matrix.osname }}
+          name: gradle-report-common-${{ inputs.os }}
           path: jsourceprofiler-common/build/reports/tests/
 
       - name: "Upload JUnit results - tool"
         uses: dorny/test-reporter@v1
         with:
-          name: "JUnit results - tool (${{ matrix.osname }})"
+          name: "JUnit results - tool (${{ inputs.os }})"
           path: jsourceprofiler-tool/build/test-results/test/TEST-*.xml
           reporter: java-junit
           fail-on-error: false
@@ -62,7 +56,7 @@ jobs:
       - name: "Upload JUnit results - common"
         uses: dorny/test-reporter@v1
         with:
-          name: "JUnit results - common (${{ matrix.osname }})"
+          name: "JUnit results - common (${{ inputs.os }})"
           path: jsourceprofiler-common/build/test-results/test/TEST-*.xml
           reporter: java-junit
           fail-on-error: false

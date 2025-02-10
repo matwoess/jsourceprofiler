@@ -1,11 +1,10 @@
-name: Deploy MkDocs to GitHub Pages
+name: "MkDocs Build"
 
 on:
   workflow_dispatch:
   push:
     branches:
       - main
-      - javadoc-publishing
     paths:
       - '.github/workflows/docs.yml'
       - 'docs/**'

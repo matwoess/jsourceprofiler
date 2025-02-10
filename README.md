@@ -1,5 +1,11 @@
 # jsourceprofiler
 
+[![CI Windows](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-windows.yml/badge.svg)](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-windows.yml)
+[![CI Ubuntu](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-ubuntu.yml/badge.svg)](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-ubuntu.yml)
+[![CI macOS](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-macos.yml/badge.svg)](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-macos.yml)
+[![MkDocs Build](https://github.com/matwoess/jsourceprofiler/actions/workflows/docs.yml/badge.svg)](https://github.com/matwoess/jsourceprofiler/actions/workflows/docs.yml)
+[![pages-build-deployment](https://github.com/matwoess/jsourceprofiler/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/matwoess/jsourceprofiler/actions/workflows/pages/pages-build-deployment)
+
 A source-code-instrumentation profiler for Java programs.
 Designed to be a single-JAR command line tool that generates HTML reports. 
 Optionally, a JavaFX GUI is available to configure the parameters and run the tool automatically.

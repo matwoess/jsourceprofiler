@@ -21,11 +21,11 @@ public class Block implements Serializable, Component {
   /**
    * The method this block belongs to.
    */
-  private Method method;
+  public Method method;
   /**
    * The outer block surrounding this block.
    */
-  private Block parentBlock;
+  public Block parentBlock;
   /**
    * The start position of the block in the source file.
    */

@@ -1,16 +1,16 @@
 # jsourceprofiler
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/matwoess/jsourceprofiler/blob/main/LICENSE)
-[![Latest Release](https://img.shields.io/github/v/release/matwoess/jsourceprofiler)](https://github.com/matwoess/jsourceprofiler/releases/latest)
-[![Maven Central: tool](https://img.shields.io/maven-central/v/org.matwoess/jsourceprofiler-tool?label=maven-central%3A%20tool)](https://central.sonatype.com/artifact/org.matwoess/jsourceprofiler-tool)
-[![Maven Central: common](https://img.shields.io/maven-central/v/org.matwoess/jsourceprofiler-common?label=maven-central%3A%20common)](https://central.sonatype.com/artifact/org.matwoess/jsourceprofiler-common)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?label=License)](https://github.com/matwoess/jsourceprofiler/blob/main/LICENSE)
+[![MkDocs Build](https://github.com/matwoess/jsourceprofiler/actions/workflows/docs.yml/badge.svg)](https://github.com/matwoess/jsourceprofiler/actions/workflows/docs.yml)
+[![GitHub Pages Deployment](https://img.shields.io/github/deployments/matwoess/jsourceprofiler/github-pages?label=GitHub%20Pages%20Deployment)](https://matwoess.github.io/jsourceprofiler/)
+
+[![Latest Release](https://img.shields.io/github/v/release/matwoess/jsourceprofiler?label=Latest%20Release)](https://github.com/matwoess/jsourceprofiler/releases/latest)
+[![Maven Central: tool](https://img.shields.io/maven-central/v/org.matwoess/jsourceprofiler-tool?label=Maven%20Central%3A%20tool)](https://central.sonatype.com/artifact/org.matwoess/jsourceprofiler-tool)
+[![Maven Central: common](https://img.shields.io/maven-central/v/org.matwoess/jsourceprofiler-common?label=Maven%20Central%3A%20common)](https://central.sonatype.com/artifact/org.matwoess/jsourceprofiler-common)
 
 [![CI Windows](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-windows.yml/badge.svg)](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-windows.yml)
 [![CI Ubuntu](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-ubuntu.yml/badge.svg)](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-ubuntu.yml)
 [![CI macOS](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-macos.yml/badge.svg)](https://github.com/matwoess/jsourceprofiler/actions/workflows/CI-macos.yml)
-
-[![MkDocs Build](https://github.com/matwoess/jsourceprofiler/actions/workflows/docs.yml/badge.svg)](https://github.com/matwoess/jsourceprofiler/actions/workflows/docs.yml)
-[![GitHub Pages Deployment](https://img.shields.io/github/deployments/matwoess/jsourceprofiler/github-pages?label=GitHub%20Pages%20Deployment)](https://matwoess.github.io/jsourceprofiler/)
 
 A source-code-instrumentation profiler for Java programs.
 Designed to be a single-JAR command line tool that generates HTML reports. 

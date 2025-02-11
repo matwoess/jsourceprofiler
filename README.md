@@ -1,6 +1,6 @@
 # jsourceprofiler
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=plastic)](https://github.com/matwoess/jsourceprofiler/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/matwoess/jsourceprofiler/blob/main/LICENSE)
 [![Latest Release](https://img.shields.io/github/v/release/matwoess/jsourceprofiler)](https://github.com/matwoess/jsourceprofiler/releases/latest)
 [![Maven Central: tool](https://img.shields.io/maven-central/v/org.matwoess/jsourceprofiler-tool?label=maven-central%3A%20tool)](https://central.sonatype.com/artifact/org.matwoess/jsourceprofiler-tool)
 [![Maven Central: common](https://img.shields.io/maven-central/v/org.matwoess/jsourceprofiler-common?label=maven-central%3A%20common)](https://central.sonatype.com/artifact/org.matwoess/jsourceprofiler-common)
